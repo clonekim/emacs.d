@@ -1,1 +1,1 @@
-("~/git/ohoman/" "~/lisper/" "~/galaga/" "~/git/bloom/" "~/lambdanative/" "~/git/jelly/" "~/git/dummy-shop/" "~/git/clojure101/" "~/git/shoes/" "/Volumes/새 볼륨/backup/41.프로젝트/mithril/" "~/clonekim.github.io/" "~/git/raku/")
+("~/.emacs.d/")
