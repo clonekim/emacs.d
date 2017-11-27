@@ -1,1 +1,1 @@
-("~/.emacs.d/")
+("~/git/hud/" "~/git/ohoman/" "~/git/cms-go/" "~/.emacs.d/")
