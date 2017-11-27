@@ -79,7 +79,10 @@
     (quit nil)))
 
 (setq electric-indent-mode nil)
-(setq insert-directory-program (executable-find "gls"))
+
+(let ((gls (executable-find "gls")))
+  (if (not gls)
+      (setq insert-directory-program gls)))
 
 ;;; Simple copy line
 (defun copy-line (arg)
