@@ -94,7 +94,7 @@
 
 ;; Font
 (set-face-attribute 'default nil :font "PT Mono 12")
-(set-fontset-font "fontset-default" 'korean-ksc5601 "NanumGothic-12")
+(set-fontset-font "fontset-default" 'korean-ksc5601 "NanumGothic-11")
 
 (custom-set-variables
  '(linum-format "%5d"))
