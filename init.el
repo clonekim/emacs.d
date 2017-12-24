@@ -19,7 +19,7 @@
 (load "web.el")
 (load "neo.el")
 (load "ui.el")
-;; (load "go.el")
+(load "go.el")
 (load "git.el")
 
 (custom-set-variables
