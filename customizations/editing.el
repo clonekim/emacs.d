@@ -90,4 +90,4 @@
   (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
 
 ;; optional key binding
-(global-set-key "\C-c\C-k" 'copy-line)
+(global-set-key "\C-c\C-y" 'copy-line)

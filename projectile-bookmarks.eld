@@ -1,1 +1,1 @@
-("~/git/hud/" "~/git/ohoman/" "~/git/cms-go/" "~/.emacs.d/")
+("~/git/ohoman-go/src/github.com/tools/godep/" "~/git/ohoman-cms/" "~/git/hub/" "~/git/ohoman/" "~/.emacs.d/" "~/go/src/github.com/gin-gonic/gin/" "~/go/src/github.com/gin-contrib/sse/" "~/projects/leaderboard-api/" "~/git/cmd/" "~/git/galaga/" "~/git/reactblogredux/" "~/hello-world/" "/Volumes/새 볼륨/bonjoure/git/oholife-jsp/" "~/git/hat/milligram-1.3.0/" "~/git/hud/" "~/git/cms-go/")

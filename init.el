@@ -17,9 +17,10 @@
 (load "setup-js.el")
 (load "emmet.el")
 (load "web.el")
+(load "rjsx-mode.el")
 (load "neo.el")
 (load "ui.el")
-;; (load "go.el")
+(load "go.el")
 (load "git.el")
 
 (custom-set-variables
