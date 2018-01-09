@@ -58,4 +58,9 @@
 (global-set-key (kbd "M-x") 'smex)
 
 ;; projectile everywhere!
-(projectile-global-mode)
+;;(projectile-global-mode)
+
+;; macOS command ls doesn't support --dired
+;; see brew info coreutils
+(when (eq system-type 'darwin)
+  (setq dired-use-ls-dired nil))
