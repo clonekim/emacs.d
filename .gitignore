@@ -3,7 +3,7 @@ backups/
 elpa/
 eshell/
 .DS_Store
-.recentf
+.recentf*
 .smex-items
 ac-comphist.dat
 cider-history
