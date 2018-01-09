@@ -2,12 +2,18 @@
   (require 'package)
   (setq package-archives '(("melpa" . "http://melpa.org/packages/") 
                            ("gnu" . "http://elpa.gnu.org/packages/")
-                           ("org" . "http://orgmode.org/elpa/")))
+                           ("org" . "http://orgmode.org/elpa/")
+                           ("melpa-stable" . "https://stable.melpa.org/packages/")))
 
   (package-initialize))
 
 (add-to-list 'load-path "~/.emacs.d/customizations")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+
+(use-package cider
+  :ensure t
+  :pin melpa-stable)
 
 (load "shell-integration.el")
 (load "navigation.el")
@@ -40,10 +46,10 @@
  '(magit-diff-section-arguments (quote ("--no-ext-diff")))
  '(package-selected-packages
    (quote
-    (magit popwin direx flycheck atom-one-dark-theme flymake-go project-explorer ghq golint go-eldoc auto-complete company-go go-mode web-mode tagedit smex rainbow-delimiters projectile paredit neotree markdown-mode ido-completing-read+ exec-path-from-shell emmet-mode clojure-mode-extra-font-locking cider))))
+    (magit popwin direx flycheck atom-one-dark-theme flymake-go project-explorer ghq golint go-eldoc auto-complete company-go go-mode web-mode tagedit smex rainbow-delimiters projectile paredit neotree markdown-mode ido-completing-read+ exec-path-from-shell emmet-mode clojure-mode-extra-font-locking))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(linum ((t (:height 96)))))
+ '(linum ((t (:height 94)))))
