@@ -66,7 +66,7 @@
 (blink-cursor-mode 1)
 
 (setq-default cursor-type 'box)
-(set-cursor-color "green")
+(set-cursor-color "yellow")
 
 ;; full path in title bar
 ;; (setq-default frame-title-format "%b (%f)")
@@ -93,8 +93,8 @@
 (setq inhibit-startup-screen t)
 
 ;; Font
-(set-face-attribute 'default nil :font (if (eq system-type 'darwin) "PT Mono 12" "DejaVu Sans Mono 12"))
-(set-fontset-font "fontset-default" 'korean-ksc5601 "NanumGothic-11")
+(set-face-attribute 'default nil :font (if (eq system-type 'darwin) "PT Mono 12" "PT Mono 11"))
+;; (set-fontset-font "fontset-default" 'korean-ksc5601 "NanumGothic-11")
 
 (custom-set-variables
  '(linum-format "%5d"))

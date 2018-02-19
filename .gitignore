@@ -7,5 +7,6 @@ eshell/
 .smex-items
 ac-comphist.dat
 cider-history
+bookmarks
 *.eld
 projectile-*
