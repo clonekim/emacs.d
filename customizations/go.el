@@ -24,7 +24,8 @@
                           (local-set-key (kbd "C-c C-a") 'go-import-add)
                           (local-set-key (kbd "C-c C-g") 'go-goto-imports)
                           (local-set-key (kbd "C-c C-f") 'gofmt)
-                          (local-set-key (kbd "M-.")     'godef-jump)))
+                          (local-set-key (kbd "M-.")     'godef-jump)
+                          (local-set-key (kbd "M-,")     'pop-tag-mark)))
 
 
 
