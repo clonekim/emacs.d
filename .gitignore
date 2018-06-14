@@ -10,3 +10,4 @@ cider-history
 bookmarks
 *.eld
 projectile-*
+session*

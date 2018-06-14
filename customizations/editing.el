@@ -91,3 +91,9 @@
 
 ;; optional key binding
 (global-set-key "\C-c\C-y" 'copy-line)
+
+(add-hook 'minibuffer-exit-hook
+          '(lambda ()
+             (let ((buffer "*Completions*"))
+               (and (get-buffer buffer)
+                    (kill-buffer buffer)))))

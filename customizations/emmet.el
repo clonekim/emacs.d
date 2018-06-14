@@ -1,11 +1,11 @@
 (require 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; マークアップ言語全部で使う
-(add-hook 'css-mode-hook  'emmet-mode) ;; CSSにも使う
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'web-mode-hook  'emmet-mode)
 
 (add-hook 'emmet-mode-hook (lambda () 
                              (setq emmet-indentation 2)
-                             (setq emmet-indent-after-insert nil)
-                             )) ;; indent はスペース2個
+                             (setq emmet-indent-after-insert nil)))
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . emmet-mode))
 (add-to-list 'auto-mode-alist '("\\.ftl\\'" . emmet-mode))
