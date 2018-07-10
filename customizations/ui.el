@@ -93,7 +93,7 @@
 (setq inhibit-startup-screen t)
 
 ;; Font
-(set-face-attribute 'default nil :font (if (eq system-type 'darwin) "PT Mono 12" "DejaVu Sans Mono 8"))
+(set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 8"))
 (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
 
 (custom-set-variables
