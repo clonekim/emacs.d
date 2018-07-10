@@ -22,7 +22,7 @@
 (load "web.el")
 (load "rjsx-mode.el")
 (load "ui.el")
-;; (load "go.el")
+(load "go.el")
 ;; (load "neo.el")
 (load "git.el")
 
