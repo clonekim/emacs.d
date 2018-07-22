@@ -23,7 +23,7 @@
 (load "rjsx-mode.el")
 (load "ui.el")
 (load "go.el")
-;; (load "neo.el")
+(load "neo.el")
 (load "git.el")
 
 (setq custom-file (make-temp-file "emacs-custom"))

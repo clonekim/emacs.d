@@ -107,6 +107,7 @@
   (POST 2)
   (PUT 2)
   (DELETE 2)
+  (PATCH 2)
   (HEAD 2)
   (ANY 2)
   (context 2))
