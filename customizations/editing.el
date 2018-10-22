@@ -1,3 +1,4 @@
+(require 'imenu-anywhere)
 ;; Customizations relating to editing a buffer.
 
 ;; Key binding to use "hippie expand" for text autocompletion
@@ -21,6 +22,8 @@
 ;; Ask when buffer changed
 (global-auto-revert-mode -1)
 
+(delete-selection-mode t)
+
 ;; Interactive search key bindings. By default, C-s runs
 ;; isearch-forward, so this swaps the bindings.
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
@@ -30,7 +33,7 @@
 (global-set-key (kbd "M-c")   'copy-region-as-kill)
 (global-set-key (kbd "M-v")   'yank)
 (global-set-key (kbd "M-g")   'goto-line)
-
+(global-set-key (kbd "C-c i") 'imenu-anywhere)
 (setq-default tab-width 2)
 
 ; 탭 대신 공백 넣기
@@ -97,3 +100,7 @@
              (let ((buffer "*Completions*"))
                (and (get-buffer buffer)
                     (kill-buffer buffer)))))
+
+
+(require 'windmove)
+(windmove-default-keybindings)

@@ -15,6 +15,7 @@
 (load "shell-integration.el")
 (load "navigation.el")
 (load "editing.el")
+(load "setup-ivy.el")
 (load "elisp-editing.el")
 (load "setup-clojure.el")
 (load "setup-js.el")
@@ -22,9 +23,10 @@
 (load "web.el")
 (load "rjsx-mode.el")
 (load "ui.el")
-(load "go.el")
+(load "go2.el")
 (load "neo.el")
 (load "git.el")
+
 
 (setq custom-file (make-temp-file "emacs-custom"))
 (load-theme 'aanila t)
