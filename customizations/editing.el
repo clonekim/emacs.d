@@ -102,5 +102,6 @@
                     (kill-buffer buffer)))))
 
 
-(require 'windmove)
-(windmove-default-keybindings)
+;;(require 'windmove)
+;;(windmove-default-keybindings)
+
