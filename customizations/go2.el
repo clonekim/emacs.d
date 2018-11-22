@@ -12,22 +12,18 @@
 
 (add-hook 'go-mode-hook 'flycheck-mode)
 (add-hook 'go-mode-hook (lambda ()
-
-                          (let ((map go-mode-map))
-                            (define-key map (kbd "C-c C-a") 'go-import-add)
-                            (define-key map (kbd "C-c C-u") 'go-remove-unused-imports)
-                            (define-key map (kbd "C-c C-g") 'go-goto-imports)
-                            (define-key map (kbd "C-c C-f") 'gofmt)
-                            (define-key map (kbd "C-c r")   'go-run)
-                            (define-key map (kbd "C-h f")   'godoc-at-point)
-                            (define-key map (kbd "M-.")     'godef-jump)
-                            (define-key map (kbd "M-,")     'pop-tag-mark))
-
-                          (add-hook 'before-save-hook 'gofmt-before-save nil t)
-
-                          (set (make-local-variable 'company-backends) '(company-go))
                           (go-eldoc-setup)
-                          (subword-mode +1)))
+                          (subword-mode +1)
+                          (add-hook 'before-save-hook 'gofmt-before-save)
+                          (local-set-key (kbd "C-c C-a") 'go-import-add)
+                          (local-set-key (kbd "C-c C-u") 'go-remove-unused-imports)
+                          (local-set-key (kbd "C-c C-g") 'go-goto-imports)
+                          (local-set-key (kbd "C-c C-f") 'gofmt)
+                          (local-set-key (kbd "C-c r")   'go-run)
+                          (local-set-key (kbd "C-h f")   'godoc-at-point)
+                          (local-set-key (kbd "M-.")     'godef-jump)
+                          (local-set-key (kbd "M-,")     'pop-tag-mark)
+                          (set (make-local-variable 'company-backends) '(company-go))))
 
 (add-hook 'go-mode-hook (lambda()
                           (company-mode)

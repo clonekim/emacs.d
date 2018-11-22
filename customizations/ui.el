@@ -61,7 +61,7 @@
 (setq inhibit-startup-screen t)
 
 ;; Font
-(set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Meslo LG M 8"))
+(set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 8"))
 (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
 
 (custom-set-variables
@@ -69,12 +69,6 @@
 
 (custom-set-faces
  '(linum ((t (:height 72)))))
-
-;; show the cursor when moving after big movements in the window
-(require 'beacon)
-(beacon-mode 1)
-(setq beacon-push-mark 35)
-(setq beacon-color "#666600")
 
 ;; show available keybindings after you start typing
 (require 'which-key)
