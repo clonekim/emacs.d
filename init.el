@@ -17,6 +17,7 @@
 (load "editing.el")
 (load "setup-ivy.el")
 (load "elisp-editing.el")
+(load "setup-projectile.el")
 (load "setup-clojure.el")
 (load "setup-js.el")
 (load "emmet.el")
@@ -27,7 +28,7 @@
 (load "neo.el")
 (load "git.el")
 
-
+;;(setq debug-on-error t)
 (setq custom-file (make-temp-file "emacs-custom"))
 (load-theme 'aanila t)
 
