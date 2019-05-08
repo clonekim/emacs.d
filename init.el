@@ -33,7 +33,11 @@
 (gc-enable)
 (setq custom-file (make-temp-file "emacs-custom"))
 (fset 'yes-or-no-p 'y-or-n-p)
-;;(load-theme 'aanila t)
+
+;;-----------------------------------------------------------------------------
+;; Theme
+;;-----------------------------------------------------------------------------
+(load-theme 'flatland t)
 
 ;;-----------------------------------------------------------------------------
 ;; Editing
@@ -47,6 +51,7 @@
 (global-set-key (kbd "S-SPC") 'ignore)
 (show-paren-mode 1)
 
+(setq-default make-backup-files nil)
 (setq-default indent-tabs-mode nil)
 (setq-default truncate-lines t)
 (setq-default cursor-type 'box)
@@ -252,7 +257,7 @@
   (scroll-bar-mode -1))
 
 (when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Meslo LGS 9"))
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Meslo LGM 8"))
    (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-10")))
 
 
@@ -260,4 +265,3 @@
   :ensure t
   :bind (("M-p" . ace-window)
          ("C-x o" . ace-window)))
-

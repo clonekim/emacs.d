@@ -11,3 +11,4 @@ bookmarks
 *.eld
 projectile-*
 session*
+.cache/
