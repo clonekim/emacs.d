@@ -43,13 +43,16 @@
 ;; Editing
 ;;-----------------------------------------------------------------------------
 
-(blink-cursor-mode -1)
+(blink-cursor-mode 1)
 (delete-selection-mode t)
 (global-hl-line-mode 1)
 (global-auto-revert-mode -1)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "S-SPC") 'ignore)
 (show-paren-mode 1)
+(set-cursor-color "yellow")
+(set-face-background 'mode-line "black")
+(set-face-foreground 'mode-line "yellow")
 
 (setq-default make-backup-files nil)
 (setq-default indent-tabs-mode nil)
@@ -57,11 +60,8 @@
 (setq-default cursor-type 'box)
 
 (use-package whole-line-or-region  :ensure t)
-
 (use-package rainbow-delimiters  :ensure t)
-
 (use-package whitespace)
-
 (use-package whitespace-cleanup-mode
   :ensure t
   :diminish whitespace-cleanup-mode
@@ -71,9 +71,6 @@
   :ensure t
   :init (which-key-mode +1))
 
-(set-cursor-color "yellow")
-(set-face-background 'mode-line "black")
-(set-face-foreground 'mode-line "yellow")
 
 
 ;;-----------------------------------------------------------------------------
@@ -90,20 +87,13 @@
                              (setq web-mode-css-indent-offset 2)
                              (setq web-mode-code-indent-offset 2)
                              (setq web-mode-enable-current-element-highlight t)
-                             (setq web-mode-enable-current-column-highlight t)))
-  :config
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[aj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode)))
-
+                             (setq web-mode-enable-current-column-highlight t))))
 
 (use-package emmet-mode
   :ensure t
   :init
   (setq emmet-indentation 2)
-  (setq emmet-indent-after-insert nil)
+  (setq emmet-indent-after-insert 1)
 
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook 'emmet-mode)
@@ -112,11 +102,14 @@
   (setq emmet-preview-default 1)
   (define-key emmet-mode-keymap (kbd "C-j") nil)
   (keyboard-translate ?\C-i ?\H-i)
-  (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line)
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . emmet-mode))
-  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode)))
+  (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line))
 
+(define-derived-mode web2-mode
+  web-mode "Emmet+HTML"
+  (emmet-mode 1))
 
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web2-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web2-mode))
 
 (use-package js2-mode
   :ensure t
@@ -265,3 +258,8 @@
   :ensure t
   :bind (("M-p" . ace-window)
          ("C-x o" . ace-window)))
+
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
