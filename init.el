@@ -47,12 +47,14 @@
 (delete-selection-mode t)
 (global-hl-line-mode 1)
 (global-auto-revert-mode -1)
+(global-set-key (kbd "s-t") '(lambda () (interactive)))
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "S-SPC") 'ignore)
 (show-paren-mode 1)
 (set-cursor-color "yellow")
 (set-face-background 'mode-line "black")
 (set-face-foreground 'mode-line "yellow")
+(setq ring-bell-function 'ignore)
 
 (setq-default make-backup-files nil)
 (setq-default indent-tabs-mode nil)
@@ -182,7 +184,13 @@
   (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
   (add-hook 'scheme-mode-hook           'enable-paredit-mode))
 
-
+;;----------------------------------------------------------------------------
+;; NeoTree
+;;----------------------------------------------------------------------------
+(use-package neotree
+  :ensure t
+  :config
+  (global-set-key [f8] 'neotree-toggle))
 
 ;;----------------------------------------------------------------------------
 ;; Clojure & CIDER
@@ -250,7 +258,7 @@
   (scroll-bar-mode -1))
 
 (when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Meslo LGM 8"))
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Meslo LG S 9"))
    (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-10")))
 
 
