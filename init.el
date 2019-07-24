@@ -37,7 +37,12 @@
 ;;-----------------------------------------------------------------------------
 ;; Theme
 ;;-----------------------------------------------------------------------------
-(load-theme 'flatland t)
+(load-theme 'gruvbox-dark-medium t)
+(custom-set-variables
+ '(linum-format "%6d"))
+(custom-set-faces
+ '(linum ((t (:height 76)))))
+
 
 ;;-----------------------------------------------------------------------------
 ;; Editing
@@ -46,6 +51,7 @@
 (blink-cursor-mode 1)
 (delete-selection-mode t)
 (global-hl-line-mode 1)
+(global-linum-mode 1)
 (global-auto-revert-mode -1)
 (global-set-key (kbd "s-t") '(lambda () (interactive)))
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -94,9 +100,9 @@
 (use-package emmet-mode
   :ensure t
   :init
-  (setq emmet-indentation 2)
-  (setq emmet-indent-after-insert 1)
-
+  (add-hook 'emmet-mode-hook (lambda ()
+                               (setq emmet-indent-after-insert t)
+                               (setq emmet-indentation 2)))
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
@@ -191,6 +197,7 @@
   :ensure t
   :config
   (global-set-key [f8] 'neotree-toggle))
+
 
 ;;----------------------------------------------------------------------------
 ;; Clojure & CIDER
