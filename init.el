@@ -2,8 +2,6 @@
 ;; Package setting
 ;;-----------------------------------------------------------------------------
 (require 'package)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/theme")
@@ -37,11 +35,15 @@
 ;;-----------------------------------------------------------------------------
 ;; Theme
 ;;-----------------------------------------------------------------------------
-(load-theme 'gruvbox-dark-medium t)
-(custom-set-variables
- '(linum-format "%6d"))
-(custom-set-faces
- '(linum ((t (:height 76)))))
+(use-package gruvbox-theme
+  :ensure t
+  :defer t
+  :init
+  (load-theme 'gruvbox-dark-medium t)
+  (custom-set-variables
+   '(linum-format "%6d"))
+  (custom-set-faces
+   '(linum ((t (:height 80))))))
 
 
 ;;-----------------------------------------------------------------------------
@@ -265,7 +267,7 @@
   (scroll-bar-mode -1))
 
 (when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Meslo LG S 9"))
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Mononoki 9"))
    (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-10")))
 
 
