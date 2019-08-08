@@ -167,6 +167,13 @@
     :ensure t
     :config (helm-descbinds-mode)))
 
+
+
+(use-package helm-ls-git
+  :bind
+  (("C-c g" . helm-ls-git-ls)))
+
+
 (use-package helm-ag
   :ensure t)
 
@@ -280,3 +287,22 @@
       '((:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
+
+
+;;----------------------------------------------------------------------------
+;; Multi Term
+;;----------------------------------------------------------------------------
+
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
+
+
+
+;;----------------------------------------------------------------------------
+;; Evil
+;;----------------------------------------------------------------------------
+
+(use-package evil
+  :ensure t
+  :init
+  (evil-mode 1))
