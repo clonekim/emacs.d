@@ -274,7 +274,7 @@
   (scroll-bar-mode -1))
 
 (when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Mononoki 9"))
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
    (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-10")))
 
 
@@ -302,7 +302,7 @@
 ;; Evil
 ;;----------------------------------------------------------------------------
 
-(use-package evil
-  :ensure t
-  :init
-  (evil-mode 1))
+;; (use-package evil
+;;   :ensure t
+;;   :init
+;;   (evil-mode 1))
