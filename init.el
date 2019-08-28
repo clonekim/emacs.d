@@ -274,8 +274,9 @@
   (scroll-bar-mode -1))
 
 (when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
-   (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-10")))
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 8"))
+   (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "PT Mono 10"))
+   )
 
 
 (use-package ace-window
@@ -306,3 +307,36 @@
 ;;   :ensure t
 ;;   :init
 ;;   (evil-mode 1))
+
+
+;;----------------------------------------------------------------------------
+;; Java
+;;----------------------------------------------------------------------------
+
+;; (setq lsp-java-vmargs
+;;       (list
+;;        "-noverify"
+;;        "-Xmx2G"
+;;        "-XX:+UseG1GC"
+;;        "-XX:+UseStringDeduplication"
+;;        "-javaagent:/home/bonjour/.m2/repository/org/projectlombok/lombok/1.18.6/lombok-1.18.6.jar"))
+
+;; (require 'cc-mode)
+
+;; (use-package projectile :ensure t)
+;; (use-package yasnippet :ensure t)
+;; (use-package lsp-mode :ensure t)
+;; (use-package hydra :ensure t)
+;; (use-package company-lsp :ensure t)
+;; (use-package lsp-ui :ensure t)
+;; (use-package lsp-java :ensure t :after lsp
+;;   :config (add-hook 'java-mode-hook 'lsp))
+
+;; (use-package dap-mode
+;;   :ensure t :after lsp-mode
+;;   :config
+;;   (dap-mode t)
+;;   (dap-ui-mode t))
+
+;; (use-package dap-java :after (lsp-java))
+
