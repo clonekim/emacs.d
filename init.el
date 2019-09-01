@@ -264,7 +264,8 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
   (setq inhibit-startup-screen t)
-  (setq inhibit-splash-screen t))
+  (setq inhibit-splash-screen t)
+  (setq initial-frame-alist '((width . 200) (height . 65))))
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
@@ -275,7 +276,7 @@
 
 (when (display-graphic-p)
    (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 8"))
-   (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "PT Mono 10"))
+   (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
    )
 
 
