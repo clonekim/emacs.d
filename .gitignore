@@ -12,3 +12,8 @@ bookmarks
 projectile-*
 session*
 .cache/
+.lsp*
+eclipse*
+recent*
+request*
+workspace
