@@ -6,7 +6,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/theme")
 (setq package-enable-at-startup nil)
-(setq package-archive-priorities '(("melpa-stable" . 1)))
+(setq package-archive-priorities '(("melpa" . 1)))
 (package-initialize)
 
 (when (not (package-installed-p 'use-package))
@@ -63,6 +63,7 @@
 (set-face-background 'mode-line "black")
 (set-face-foreground 'mode-line "yellow")
 (setq ring-bell-function 'ignore)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (setq-default make-backup-files nil)
 (setq-default indent-tabs-mode nil)
@@ -132,6 +133,15 @@
 
 
 ;;-----------------------------------------------------------------------------
+;; GraphQL
+;;-----------------------------------------------------------------------------
+(use-package graphql-mode
+  :ensure t
+  :mode "\\.gql\\'")
+
+
+
+;;-----------------------------------------------------------------------------
 ;; helm
 ;;-----------------------------------------------------------------------------
 (use-package helm
@@ -139,8 +149,8 @@
   :diminish helm-mode
   :bind (("C-c h" . helm-mini)
          ("C-h a" . helm-apropos)
-         ;; ("C-x C-b" . helm-buffers-list)
-         ;; ("C-x b" . helm-buffers-list)
+         ;;("C-x C-b" . helm-buffers-list)
+         ("C-x b" . helm-buffers-list)
          ("M-y" . helm-show-kill-ring)
          ("M-x" . helm-M-x)
          ("C-x c o" . helm-occur)
@@ -162,7 +172,7 @@
         helm-quick-update t
         helm-M-x-requires-pattern nil
         helm-ff-skip-boring-files t)
-  :config  
+  :config
   (use-package helm-descbinds
     :ensure t
     :config (helm-descbinds-mode)))
@@ -177,7 +187,9 @@
 (use-package helm-ag
   :ensure t)
 
-
+;;----------------------------------------------------------------------------
+;; Magit
+;;----------------------------------------------------------------------------
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status )))
@@ -265,7 +277,7 @@
       scroll-preserve-screen-position 1)
   (setq inhibit-startup-screen t)
   (setq inhibit-splash-screen t)
-  (setq initial-frame-alist '((width . 200) (height . 65))))
+  (setq initial-frame-alist '((width . 180) (height . 50))))
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
@@ -275,7 +287,7 @@
   (scroll-bar-mode -1))
 
 (when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 8"))
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "CamingoCode Bold 9"))
    (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
    )
 
@@ -320,7 +332,7 @@
 ;;        "-Xmx2G"
 ;;        "-XX:+UseG1GC"
 ;;        "-XX:+UseStringDeduplication"
-;;        "-javaagent:/home/bonjour/.m2/repository/org/projectlombok/lombok/1.18.6/lombok-1.18.6.jar"))
+;;        "-javaagent:/home/bonjour/.m2/repository/org/projectlombok/lombok/1.18.10/lombok-1.18.10.jar"))
 
 ;; (require 'cc-mode)
 
@@ -340,4 +352,3 @@
 ;;   (dap-ui-mode t))
 
 ;; (use-package dap-java :after (lsp-java))
-
