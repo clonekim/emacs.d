@@ -2,6 +2,7 @@ auto-save-list/
 backups/
 elpa/
 eshell/
+transient/
 .DS_Store
 .recentf*
 .smex-items
@@ -17,3 +18,4 @@ eclipse*
 recent*
 request*
 workspace
+*.jar

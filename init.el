@@ -109,6 +109,7 @@
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'web-mode-hook 'web-mode-init-hook)
   :config
   (setq emmet-preview-default 1)
   (define-key emmet-mode-keymap (kbd "C-j") nil)
@@ -121,16 +122,37 @@
 
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web2-mode))
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . web2-mode))
+(add-to-list 'auto-mode-alist '("\\.js[xp]?\\'" . web2-mode))
 
-(use-package js2-mode
+;; (use-package js2-mode
+;;   :ensure t
+;;   :mode "\\.js\\'"
+;;   :init
+;;   (add-hook 'js-mode-hook 'subword-mode)
+;;   :config
+;;   (setq js2-strict-missing-semi-warning nil)
+;;   (setq-default js2-basic-offset 2))
+
+(use-package flycheck
   :ensure t
-  :mode "\\.js\\'"
   :init
-  (add-hook 'js-mode-hook 'subword-mode)
+  (add-hook 'after-init-hook #'global-flycheck-mode)
   :config
-  (setq js2-strict-missing-semi-warning nil)
-  (setq-default js2-basic-offset 2))
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint json-jsonlist)))
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
 
+
+
+(use-package add-node-modules-path
+  :ensure t
+  :config
+  (use-package prettier-js
+    :ensure t
+    :after web-mode
+    :init
+    (add-hook 'web-mode-hook 'web-mode-init-prettier-hook)))
 
 ;;-----------------------------------------------------------------------------
 ;; GraphQL
@@ -277,7 +299,7 @@
       scroll-preserve-screen-position 1)
   (setq inhibit-startup-screen t)
   (setq inhibit-splash-screen t)
-  (setq initial-frame-alist '((width . 180) (height . 50))))
+  (setq initial-frame-alist '((width . 160) (height . 50))))
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
@@ -287,7 +309,7 @@
   (scroll-bar-mode -1))
 
 (when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "CamingoCode Bold 9"))
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
    (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
    )
 
@@ -306,6 +328,8 @@
 ;;----------------------------------------------------------------------------
 ;; Multi Term
 ;;----------------------------------------------------------------------------
+(unless (package-installed-p 'multi-term)
+  (package-install 'multi-term))
 
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
@@ -332,18 +356,22 @@
 ;;        "-Xmx2G"
 ;;        "-XX:+UseG1GC"
 ;;        "-XX:+UseStringDeduplication"
-;;        "-javaagent:/home/bonjour/.m2/repository/org/projectlombok/lombok/1.18.10/lombok-1.18.10.jar"))
+;;        (concat "-javaagent:" (getenv "HOME") "/.emacs.d/lombok-1.18.12.jar")))
 
 ;; (require 'cc-mode)
 
+;; (use-package imenu :ensure t)
 ;; (use-package projectile :ensure t)
 ;; (use-package yasnippet :ensure t)
 ;; (use-package lsp-mode :ensure t)
 ;; (use-package hydra :ensure t)
-;; (use-package company-lsp :ensure t)
+;; (use-package company-lsp :ensure t
+;;   :bind (("C-<tab>" . company-complete)))
+
 ;; (use-package lsp-ui :ensure t)
 ;; (use-package lsp-java :ensure t :after lsp
-;;   :config (add-hook 'java-mode-hook 'lsp))
+;;   :config
+;;   (add-hook 'java-mode-hook 'lsp))
 
 ;; (use-package dap-mode
 ;;   :ensure t :after lsp-mode
