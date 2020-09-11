@@ -208,16 +208,17 @@
   :diminish helm-mode
   :bind (("C-c h" . helm-mini)
          ("C-h a" . helm-apropos)
-         ("C-x C-b" . helm-buffers-list)
          ("C-x b" . helm-buffers-list)
          ("M-y" . helm-show-kill-ring)
          ("M-x" . helm-M-x)
+         ("C-x f" . helm-find-files)
          ("C-x c o" . helm-occur)
          ("C-x c s" . helm-swoop)
          ("C-x c y" . helm-yas-complete)
          ("C-x c Y" . helm-yas-create-snippet-on-region)
          ("C-x c b" . my/helm-do-grep-book-notes)
          ("C-x c SPC" . helm-all-mark-rings)
+         ("C-x C-g" . helm-grep-do-git-grep)
          ("C-x C-o" . ffap))
   :init
   (require 'helm-config)
@@ -235,12 +236,6 @@
   (use-package helm-descbinds
     :ensure t
     :config (helm-descbinds-mode)))
-
-
-
-(use-package helm-ls-git
-  :bind
-  (("C-c g" . helm-ls-git-ls)))
 
 
 (use-package helm-ag
