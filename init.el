@@ -109,7 +109,7 @@
 (setq-default indent-tabs-mode nil)
 (setq-default truncate-lines t)
 (setq-default cursor-type 'box)
-
+(setq-default tab-width 2)
 (use-package whole-line-or-region  :ensure t)
 (use-package rainbow-delimiters  :ensure t)
 (use-package whitespace :ensure t)
@@ -131,6 +131,7 @@
 (use-package web-mode
   :ensure t
   :init
+  (setq js-indent-level 2)
   (setq web-mode-comment-formats '(("javascript" . "//")))
   (setq web-mode-enable-auto-pairing nil)
   (setq web-mode-markup-indent-offset 2)
@@ -352,3 +353,4 @@
 
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
+(setq tab-width 2)
