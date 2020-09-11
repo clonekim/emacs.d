@@ -353,4 +353,3 @@
 
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
-(setq tab-width 2)
