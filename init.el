@@ -26,24 +26,64 @@
   "Enable automatic garbage collection."
   (setq gc-cons-threshold 800000))
 
+(defun copy-line (arg)
+  (interactive "p")
+  (kill-ring-save (line-beginning-position)
+                  (line-beginning-position (+ 1 arg)))
+  (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
+
+
 (add-hook 'minibuffer-setup-hook #'gc-disable)
 (add-hook 'minibuffer-exit-hook #'gc-enable)
 (gc-enable)
 (setq custom-file (make-temp-file "emacs-custom"))
+(global-set-key "\C-c\C-k" 'copy-line)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;;-----------------------------------------------------------------------------
 ;; Theme
 ;;-----------------------------------------------------------------------------
-(use-package gruvbox-theme
-  :ensure t
-  :defer t
-  :init
-  (load-theme 'gruvbox-dark-medium t)
-  (custom-set-variables
-   '(linum-format "%6d"))
-  (custom-set-faces
-   '(linum ((t (:height 80))))))
+(use-package blackboard-theme :ensure t)
+
+(load-theme 'blackboard t)
+(setq linum-format "%5d ")
+(fringe-mode 1)
+(custom-set-faces
+ '(fringe ((t (:foreground "blue"))))
+ ;; '(fringe-mode 1 nil (fringe))
+ '(linum ((t (:foreground "green" :height 80))))
+ )
+
+
+
+;;----------------------------------------------------------------------------
+;; UI
+;;----------------------------------------------------------------------------
+
+(when (display-graphic-p)
+  (menu-bar-mode -1)
+  (column-number-mode t)
+  (size-indication-mode t)
+  (setq use-dialog-box nil)
+  (setq use-file-dialog nil)
+  (setq scroll-margin 0
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
+  (setq inhibit-startup-screen t)
+  (setq inhibit-splash-screen t)
+  (setq initial-frame-alist '((width . 160) (height . 50))))
+
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+
+;; Don't show native OS scroll bars for buffers because they're redundant
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+
+(when (display-graphic-p)
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Operator Mono Light 10"))
+   (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
+   )
 
 
 ;;-----------------------------------------------------------------------------
@@ -72,7 +112,7 @@
 
 (use-package whole-line-or-region  :ensure t)
 (use-package rainbow-delimiters  :ensure t)
-(use-package whitespace)
+(use-package whitespace :ensure t)
 (use-package whitespace-cleanup-mode
   :ensure t
   :diminish whitespace-cleanup-mode
@@ -91,57 +131,54 @@
 (use-package web-mode
   :ensure t
   :init
+  (setq web-mode-comment-formats '(("javascript" . "//")))
+  (setq web-mode-enable-auto-pairing nil)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[aj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.ftl\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+
+  (add-hook 'emmet-mode #'web-mode-hook )
   (add-hook 'html-mode-hook 'subword-mode)
-  (add-hook 'web-mode-hook (lambda ()
-                             (setq web-mode-enable-auto-pairing nil)
-                             (setq web-mode-markup-indent-offset 2)
-                             (setq web-mode-css-indent-offset 2)
-                             (setq web-mode-code-indent-offset 2)
-                             (setq web-mode-enable-current-element-highlight t)
-                             (setq web-mode-enable-current-column-highlight t))))
+)
 
 (use-package emmet-mode
   :ensure t
-  :init
-  (add-hook 'emmet-mode-hook (lambda ()
-                               (setq emmet-indent-after-insert t)
-                               (setq emmet-indentation 2)))
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'css-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'web-mode-init-hook)
+  :defer t
   :config
-  (setq emmet-preview-default 1)
   (define-key emmet-mode-keymap (kbd "C-j") nil)
   (keyboard-translate ?\C-i ?\H-i)
-  (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line))
-
-(define-derived-mode web2-mode
-  web-mode "Emmet+HTML"
-  (emmet-mode 1))
-
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web2-mode))
-(add-to-list 'auto-mode-alist '("\\.vue\\'" . web2-mode))
-(add-to-list 'auto-mode-alist '("\\.js[xp]?\\'" . web2-mode))
-
-;; (use-package js2-mode
-;;   :ensure t
-;;   :mode "\\.js\\'"
-;;   :init
-;;   (add-hook 'js-mode-hook 'subword-mode)
-;;   :config
-;;   (setq js2-strict-missing-semi-warning nil)
-;;   (setq-default js2-basic-offset 2))
-
-(use-package flycheck
-  :ensure t
+  (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line)
   :init
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-  :config
-  (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(javascript-jshint json-jsonlist)))
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
+  (setq emmet-preview-default 1)
+  (setq emmet-indent-after-insert t)
+  (setq emmet-indentation 2)
+  (add-hook 'sgml-mode-hook #'emmet-mode)
+  (add-hook 'css-mode-hook #'emmet-mode)
+  (add-hook 'web-mode-hook #'emmet-mode))
+
+(use-package rjsx-mode
+  :ensure t)
+
+
+
+;; (use-package flycheck
+;;   :ensure t
+;;   :init
+;;   (add-hook 'after-init-hook #'global-flycheck-mode)
+;;   :config
+;;   ;; (setq-default flycheck-disabled-checkers
+;;   ;;               (append flycheck-disabled-checkers
+;;   ;;                       '(javascript-jshint json-jsonlist)))
+;;   ;; (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;;   )
 
 
 
@@ -171,7 +208,7 @@
   :diminish helm-mode
   :bind (("C-c h" . helm-mini)
          ("C-h a" . helm-apropos)
-         ;;("C-x C-b" . helm-buffers-list)
+         ("C-x C-b" . helm-buffers-list)
          ("C-x b" . helm-buffers-list)
          ("M-y" . helm-show-kill-ring)
          ("M-x" . helm-M-x)
@@ -216,6 +253,21 @@
   :ensure t
   :bind (("C-x g" . magit-status )))
 
+;;----------------------------------------------------------------------------
+;; Git gutter & Fringe
+;;----------------------------------------------------------------------------
+(use-package git-gutter
+  :ensure t
+  :init
+  (use-package git-gutter-fringe :ensure t)
+  (setq-default left-fringe-width  20)
+  (setq-default right-fringe-width 20)
+  (set-face-foreground 'git-gutter-fr:modified "yellow")
+  (set-face-foreground 'git-gutter-fr:added    "blue")
+  (set-face-foreground 'git-gutter-fr:deleted  "white")
+  (setq git-gutter:window-width 2)
+  (setq git-gutter:unchanged-sign " ")
+  (global-git-gutter-mode +1))
 
 ;;----------------------------------------------------------------------------
 ;; Paredit
@@ -284,34 +336,6 @@
 
 
 
-;;----------------------------------------------------------------------------
-;; UI
-;;----------------------------------------------------------------------------
-
-(when (display-graphic-p)
-  (menu-bar-mode -1)
-  (column-number-mode t)
-  (size-indication-mode t)
-  (setq use-dialog-box nil)
-  (setq use-file-dialog nil)
-  (setq scroll-margin 0
-      scroll-conservatively 100000
-      scroll-preserve-screen-position 1)
-  (setq inhibit-startup-screen t)
-  (setq inhibit-splash-screen t)
-  (setq initial-frame-alist '((width . 160) (height . 50))))
-
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-
-;; Don't show native OS scroll bars for buffers because they're redundant
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-
-(when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
-   (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
-   )
 
 
 (use-package ace-window
@@ -333,50 +357,3 @@
 
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
-
-
-
-;;----------------------------------------------------------------------------
-;; Evil
-;;----------------------------------------------------------------------------
-
-;; (use-package evil
-;;   :ensure t
-;;   :init
-;;   (evil-mode 1))
-
-
-;;----------------------------------------------------------------------------
-;; Java
-;;----------------------------------------------------------------------------
-
-;; (setq lsp-java-vmargs
-;;       (list
-;;        "-noverify"
-;;        "-Xmx2G"
-;;        "-XX:+UseG1GC"
-;;        "-XX:+UseStringDeduplication"
-;;        (concat "-javaagent:" (getenv "HOME") "/.emacs.d/lombok-1.18.12.jar")))
-
-;; (require 'cc-mode)
-
-;; (use-package imenu :ensure t)
-;; (use-package projectile :ensure t)
-;; (use-package yasnippet :ensure t)
-;; (use-package lsp-mode :ensure t)
-;; (use-package hydra :ensure t)
-;; (use-package company-lsp :ensure t
-;;   :bind (("C-<tab>" . company-complete)))
-
-;; (use-package lsp-ui :ensure t)
-;; (use-package lsp-java :ensure t :after lsp
-;;   :config
-;;   (add-hook 'java-mode-hook 'lsp))
-
-;; (use-package dap-mode
-;;   :ensure t :after lsp-mode
-;;   :config
-;;   (dap-mode t)
-;;   (dap-ui-mode t))
-
-;; (use-package dap-java :after (lsp-java))
