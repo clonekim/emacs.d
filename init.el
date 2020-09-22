@@ -37,6 +37,7 @@
 (add-hook 'minibuffer-exit-hook #'gc-enable)
 (gc-enable)
 (setq custom-file (make-temp-file "emacs-custom"))
+(setq default-directory (concat (getenv "HOME") "/" ))
 (global-set-key "\C-c\C-k" 'copy-line)
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -47,11 +48,11 @@
 
 (load-theme 'blackboard t)
 (setq linum-format "%5d ")
-(fringe-mode 1)
+;;(fringe-mode 1)
 (custom-set-faces
  '(fringe ((t (:foreground "blue"))))
- ;; '(fringe-mode 1 nil (fringe))
- '(linum ((t (:foreground "green" :height 80))))
+ '(fringe-mode 1 nil (fringe))
+ '(linum ((t (:foreground "green" :height 96))))
  )
 
 
