@@ -36,5 +36,9 @@
     :config (helm-descbinds-mode)))
 
 
+(use-package helm-ls-git
+ :bind
+ (("C-c g" . helm-ls-git-ls)))
+
 (use-package helm-ag
   :ensure t)
