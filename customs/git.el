@@ -21,11 +21,3 @@
   (setq git-gutter:window-width 2)
   (setq git-gutter:unchanged-sign " ")
   (global-git-gutter-mode +1))
-
-
-
-
-(setq frame-title-format
-      '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 "%b"))))
