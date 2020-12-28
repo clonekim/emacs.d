@@ -3,7 +3,6 @@
 ;;----------------------------------------------------------------------------
 
 (when (display-graphic-p)
-  (menu-bar-mode -1)
   (column-number-mode t)
   (size-indication-mode t)
   (setq use-dialog-box nil)
@@ -15,13 +14,6 @@
   (setq inhibit-splash-screen t)
   (setq initial-frame-alist '((width . 120) (height . 60))))
 
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-
-;; Don't show native OS scroll bars for buffers because they're redundant
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-
 (when (display-graphic-p)
    (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
    (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
@@ -31,7 +23,7 @@
 ;;-----------------------------------------------------------------------------
 ;; Theme
 ;;-----------------------------------------------------------------------------
-(load-theme 'leuven-dark t)
+(load-theme 'gruvbox-dark-hard t)
 
 (setq linum-format "%4d ")
 (fringe-mode 1)
