@@ -33,6 +33,7 @@
 (global-set-key (kbd "s-t") '(lambda () (interactive)))
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "S-SPC") 'ignore)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (show-paren-mode 1)
 
 ;; (set-cursor-color "yellow")
