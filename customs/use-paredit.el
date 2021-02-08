@@ -2,7 +2,6 @@
 ;; Paredit
 ;;----------------------------------------------------------------------------
 (use-package paredit
-  :ensure t
   :diminish paredit-mode
   :config
   (use-package paredit-everywhere :ensure t)
