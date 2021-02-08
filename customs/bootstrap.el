@@ -22,7 +22,7 @@
 (gc-enable)
 
 
-(global-set-key "\C-c\C-k" 'copy-line)
+;;(global-set-key "\C-c\C-k" 'copy-line)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (blink-cursor-mode 1)
@@ -54,6 +54,5 @@
 (use-package rainbow-delimiters  :ensure t)
 (use-package whitespace :ensure t)
 (use-package whitespace-cleanup-mode
-  :ensure t
   :diminish whitespace-cleanup-mode
   :init (global-whitespace-cleanup-mode))
