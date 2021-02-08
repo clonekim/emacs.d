@@ -22,7 +22,7 @@
 (gc-enable)
 
 
-(global-set-key "\C-c\C-k" 'copy-line)
+;;(global-set-key "\C-c\C-k" 'copy-line)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (blink-cursor-mode 1)
