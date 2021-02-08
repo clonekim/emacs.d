@@ -8,7 +8,8 @@
   (size-indication-mode t)
   (setq use-dialog-box nil)
   (setq use-file-dialog nil)
-  (setq scroll-margin 0
+  (setq 
+      scroll-margin 0
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
   (setq inhibit-startup-screen t)
@@ -31,7 +32,7 @@
 ;;-----------------------------------------------------------------------------
 ;; Theme
 ;;-----------------------------------------------------------------------------
-(load-theme 'leuven-dark t)
+(load-theme 'gruvbox-dark-hard t)
 
 (setq linum-format "%4d ")
 (fringe-mode 1)
