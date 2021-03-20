@@ -14,15 +14,11 @@
         ("TAB" . indent-for-tab-command))
 
    (:map evil-normal-state-map
-        ("SPC <up>" . 'buf-move-up)
-        ("SPC <down>" . 'buf-move-down)
-        ("SPC <left>" . 'buf-move-left)
-        ("SPC <right>" . 'buf-move-right)
         ("SPC b" . ibuffer-jump-to-buffer)
         ("SPC d" . dired)
         ("SPC l" . ibuffer-list-buffers)
         ("SPC f" . find-file)
         ("SPC w" . save-buffer)
         ("SPC k" . kill-this-buffer)
-        ("SPC r" . counsel-recentf))
+        ("SPC r" . helm-recentf))
   )

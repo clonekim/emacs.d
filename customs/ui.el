@@ -8,13 +8,18 @@
   (size-indication-mode t)
   (setq use-dialog-box nil)
   (setq use-file-dialog nil)
-  (setq 
-      scroll-margin 0
+  (setq scroll-margin 0
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
   (setq inhibit-startup-screen t)
   (setq inhibit-splash-screen t)
   (setq initial-frame-alist '((width . 120) (height . 60))))
+
+(when (display-graphic-p)
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
+   ;;(set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
+   )
+
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
@@ -23,20 +28,16 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-(when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
-   (set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
-   )
-
 
 ;;-----------------------------------------------------------------------------
 ;; Theme
 ;;-----------------------------------------------------------------------------
-(load-theme 'gruvbox-dark-hard t)
+;;(load-theme 'gruvbox-dark-hard t)
 
 (setq linum-format "%4d ")
 (fringe-mode 1)
 (custom-set-faces
-;; '(fringe-mode 1 nil (fringe))
- '(linum ((t (:height 80))))
+ '(fringe ((t (:foreground "blue"))))
+ '(fringe-mode 1 nil (fringe))
+ '(linum ((t (:foreground "green" :height 80))))
  )

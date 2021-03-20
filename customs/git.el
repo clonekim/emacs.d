@@ -2,6 +2,7 @@
 ;; Magit
 ;;----------------------------------------------------------------------------
 (use-package magit
+  :ensure t
   :bind (("C-x g" . magit-status )))
 
 
@@ -9,6 +10,7 @@
 ;; Git gutter & Fringe
 ;;----------------------------------------------------------------------------
 (use-package git-gutter
+  :ensure t
   :init
   (use-package git-gutter-fringe :ensure t)
   (setq-default left-fringe-width  20)

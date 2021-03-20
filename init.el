@@ -3,8 +3,8 @@
 ;;-----------------------------------------------------------------------------
 (require 'package)
 
-(setq debug-on-error t)
-(setq lsp-print-io t)
+;;(setq debug-on-error t)
+;;(setq lsp-print-io t)
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1)
@@ -42,7 +42,7 @@
 (load "web.el")
 (load "use-term.el")
 (load "use-paredit.el")
-(load "use-ivy.el")
+(load "use-helm.el")
 (load "use-company.el")
 (load "use-swiper.el")
 (load "use-evil.el")

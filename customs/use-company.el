@@ -1,4 +1,5 @@
 (use-package company
+  :ensure t
   :config
   (setq company-transformers  '( company-sort-by-backend-importance ))  ;; 정렬 순서
   (setq company-idle-delay  0)  ; 기본값은 0.5

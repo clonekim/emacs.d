@@ -2,6 +2,7 @@
 ;; Clojure & CIDER
 ;;----------------------------------------------------------------------------
 (use-package clojure-mode
+  :ensure t
   :config
   (use-package flycheck-clojure
     :ensure t

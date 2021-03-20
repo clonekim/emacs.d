@@ -1,6 +1,7 @@
 (use-package web-mode
+  :ensure t
   :mode
-  ("\\.jsx?\\'"
+  ("\\.js?\\'"
    "\\.hbs\\'"
    "\\.mustache\\'"
    "\\.html?\\'"
@@ -18,6 +19,7 @@
   )
 
 (use-package emmet-mode
+  :ensure t
   :defer t
   :config
   (define-key emmet-mode-keymap (kbd "C-j") nil)
