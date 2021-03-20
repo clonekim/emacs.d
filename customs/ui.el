@@ -16,7 +16,7 @@
   (setq initial-frame-alist '((width . 120) (height . 60))))
 
 (when (display-graphic-p)
-   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
+   (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "Hermit Medium 10"))
    (unless (eq system-type 'darwin)
      (set-fontset-font "fontset-default" 'korean-ksc5601 "NanumGothic-9"))
    )
