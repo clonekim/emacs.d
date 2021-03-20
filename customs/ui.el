@@ -17,7 +17,8 @@
 
 (when (display-graphic-p)
    (set-face-attribute 'default nil :font (if (eq system-type 'darwin) "Andale Mono 12" "DejaVu Sans Mono 9"))
-   ;;(set-fontset-font "fontset-default" 'korean-ksc5601 (if (eq system-type 'darwin) "NanumGothic-11" "NanumGothic-9"))
+   (unless (eq system-type 'darwin)
+     (set-fontset-font "fontset-default" 'korean-ksc5601 "NanumGothic-9"))
    )
 
 
@@ -39,5 +40,7 @@
 (custom-set-faces
  '(fringe ((t (:foreground "blue"))))
  '(fringe-mode 1 nil (fringe))
- '(linum ((t (:foreground "green" :height 80))))
+ (unless (eq system-type 'darwin)
+   '(linum ((t (:foreground "green" :height 80))))
+   )
  )
