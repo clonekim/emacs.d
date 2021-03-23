@@ -42,3 +42,6 @@
 
 (use-package helm-ag
   :ensure t)
+
+
+(global-set-key (kbd "M-x") 'helm-M-x)
