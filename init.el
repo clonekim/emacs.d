@@ -13,11 +13,12 @@
 (menu-bar-mode -1)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
-;(setq package-enable-at-startup nil)
-;(setq package-archive-priorities '(("melpa" . 1)))
+(setq package-enable-at-startup nil)
+(setq package-archive-priorities '(("melpa-stable" . 1)))
 (package-initialize)
 
 (unless package-archive-contents
