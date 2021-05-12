@@ -22,6 +22,7 @@
   (require 'helm-config)
   (setq helm-candidate-number-limit 100)
   (setq helm-yas-display-key-on-candidate t)
+  (setq helm-split-window-in-side-p t)
   ;; for pretty fast updates when hitting RET too quickly
   ;; after typing fast:
   (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
