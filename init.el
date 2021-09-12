@@ -41,3 +41,4 @@
 (load "doom.el")
 (load "web.el")
 (load "theme.el")
+(load "use-dashboard.el")

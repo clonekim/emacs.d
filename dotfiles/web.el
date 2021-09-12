@@ -20,7 +20,8 @@
         web-mode-enable-current-column-highlight nil
         web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2))
+        web-mode-code-indent-offset 2)
+  )
 
 
 (use-package emmet-mode
@@ -39,3 +40,9 @@
    (sgml-mode . emmet-mode)
    (css-mode . emmet-mode)))
 
+
+(use-package rjsx-mode
+  :mode
+  ("\\.jsx?\\'")
+  :hook
+  ((web-mode . rjsx-mode)))

@@ -34,13 +34,11 @@
     :config (helm-descbinds-mode)))
 
 
+(use-package helm-lsp)
+(use-package helm-swoop)
 (use-package helm-ag)
+(use-package helm-projectile)
 
 (use-package helm-ls
   (add-hook 'prog-mode-hook  'lsp))
 
-
-
-;; (define-key global-map [remap find-file] #'helm-find-files)
-;; (define-key global-map [remap execute-extended-command] #'helm-M-x)
-;; (define-key global-map [remap switch-to-buffer] #'helm-mini)

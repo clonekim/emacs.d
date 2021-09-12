@@ -13,6 +13,7 @@
   (set-fontset-font "fontset-default" 'korean-ksc5601 "NanumGothic-*"))
 
 
+(setq initial-frame-alist '((width . 140) (height . 57)))
 (setq warning-minimum-level :emergency)
 (setq inhibit-startup-screen t)
 (setq ring-bell-function 'ignore)
@@ -109,6 +110,13 @@
 (use-package smartparens
   :config
   (add-hook 'prog-mode-hook 'smartparens-mode))
+
+
+(use-package winum
+  :init (setq winum-mode-line-position 1
+              winum-auto-setup-mode-line nil ; because we want spaceline to do it
+              winum-numbering-scope 'global)
+  :config (winum-mode))
 
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
