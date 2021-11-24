@@ -103,7 +103,7 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 (global-set-key (kbd "s-t") '(lambda () (interactive)))
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "S-SPC") 'ignore)
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;;(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 #+END_SRC
 
 
