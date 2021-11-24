@@ -369,7 +369,6 @@ default is 60
 
 
 * Org
-** Common Settings
 #+BEGIN_SRC emacs-lisp
     (setq org-ellipsis " ")
     (setq org-src-fontify-natively t)
