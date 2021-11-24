@@ -482,12 +482,25 @@ default is 60
 
 * Web Mode
 #+BEGIN_SRC emacs-lisp
+  (use-package prettier-js
+    :ensure t
+    :config
+    (setq prettier-js-args '(
+                           "--single-quote"
+                           "--jsx-single-quote" "true"
+                           "--bracket-spacing" "false"
+                           ))
+    )
+
   (use-package js2-mode
     :ensure t
     :mode "\\.js\\'"
     :config
-    (setq-default js-indent-level 2)
-    (setq-default js2-ignored-warnings '("msg.extra.trailing.comma")))
+    (setq-default js-indent-level 2
+                  js2-strict-missing-semi-warning nil
+                  js2-highlight-external-variables nil
+                  js2-ignored-warnings '("msg.extra.trailing.comma"))
+    (add-hook 'js2-mode-hook 'prettier-js-mode))
 
   (use-package web-mode
     :ensure t
@@ -505,8 +518,10 @@ default is 60
           web-mode-enable-current-column-highlight nil
           web-mode-markup-indent-offset 2
           web-mode-css-indent-offset 2
-          web-mode-code-indent-offset 2)
-    )
+          web-mode-code-indent-offset 2
+          web-mode-attr-indent-offset 2
+          css-indent-offset 2)
+    (add-hook 'web-mode-hook 'prettier-js-mode))
 
   (use-package emmet-mode
     :ensure t
