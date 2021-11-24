@@ -34,7 +34,7 @@
 
 ** Frame size
 #+BEGIN_SRC emacs-lisp
-(setq initial-frame-alist '((width . 80) (height . 120)))
+(setq initial-frame-alist '((width . 140) (height . 80)))
 #+END_SRC
 
 ** Font
