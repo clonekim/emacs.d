@@ -288,7 +288,7 @@ default is 60
     (setq magit-push-always-verify nil)
     (setq git-commit-summary-max-length 50)
     :bind
-    ("M-g" . magit-status))
+    ("C-x g" . magit-status))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -441,6 +441,7 @@ default is 60
            ("M-x" . helm-M-x)
            ("M-y" . helm-show-kill-ring)
            ("C-x f" . helm-find-files)
+           ("C-x r f" . helm-recentf)
            ("C-x c o" . helm-occur)
            ("C-x c s" . helm-swoop)
            ("C-x c y" . helm-yas-complete)
@@ -573,6 +574,7 @@ default is 60
 
 
 * Add Hook
+org, dired에서는 라인넘버를 보여주지 않는다
 #+BEGIN_SRC emacs-lisp
  (add-hook 'org-mode-hook 'org-indent-mode  'nolinum)
  (add-hook 'dired-mode-hook  'nolinum)
