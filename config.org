@@ -87,6 +87,7 @@ parentheses, braces, brackets, etc.
                               (?\( . ?\))
                               (?\[ . ?\])
                               (?\" . ?\")
+                              (?\' . ?\')
                               ))
 
   (electric-pair-mode t)
@@ -125,7 +126,9 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
     :ensure t
     :init (doom-modeline-mode 1)
     :config
-    (set doom-modeline-modal-icon t))
+    (setq doom-modeline-height 20)
+    (setq doom-modeline-bar-width 4)
+    (setq doom-modeline-modal-icon t))
 #+END_SRC
 
 ** async
