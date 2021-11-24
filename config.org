@@ -1,0 +1,477 @@
+#+STARTUP: overview
+
+
+* Garbage Collection
+#+BEGIN_SRC emacs-lisp
+(setq gc-cons-threshold 10000000)
+
+(add-hook 'after-init-hook
+  (lambda ()
+    (setq gc-cons-threshold 1000000)
+      (message "gc-cons-threshold restored "
+        gc-cons-threshold)))
+#+END_SRC
+
+
+
+* Editor Perferences
+
+** Basic Functionality
+
+#+BEGIN_SRC emacs-lisp
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(blink-cursor-mode 1)
+(delete-selection-mode t)
+(setq-default make-backup-files nil)
+(setq-default truncate-lines t)
+(setq-default cursor-type 'box)
+(setq ring-bell-function 'ignore)
+(setq create-lockfiles nil)
+(setq custom-file (make-temp-file "emacs-custom"))
+(setq default-directory (concat (getenv "HOME") "/"))
+#+END_SRC
+
+** Font
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute
+ 'default nil
+ :font
+ (if (eq system-type 'darwin)
+     "Andale Mono 12"
+     "DejaVu Sans Mono 9"))
+
+(unless (eq system-type 'darwin)
+  (set-fontset-font "fontset-default" 'korean-ksc5601 "NanumGothic-*"))
+#+END_SRC
+
+** Line/Fringe
+
+#+BEGIN_SRC emacs-lisp
+(global-hl-line-mode 1)
+(global-linum-mode 1)
+(setq linum-format "%6d ")
+(fringe-mode 1)
+(custom-set-faces
+ '(fringe-mode 1 nil (fringe))
+ (unless (eq system-type 'darwin)
+   '(linum ((t (:height 80))))
+   )
+ )
+#+END_SRC
+
+
+** Tab
+#+BEGIN_SRC emacs-lisp
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil) ;;Tab사용안함
+#+END_SRC
+
+
+** Subwords
+Subword will remaps word-based editing commands to subword-based commands that 
+handle symbols with mixed uppercase and lowercase letters.
+#+BEGIN_SRC emacs-lisp
+  (global-subword-mode 1)
+#+END_SRC
+
+** Electric pair mode
+Electric Pair mode, a global minor mode, provides a way to easily insert matching delimiters:
+parentheses, braces, brackets, etc. 
+#+BEGIN_SRC emacs-lisp
+  (setq electric-pair-pairs '(
+			     (?\{ . ?\})
+			     (?\( . ?\))
+			     (?\[ . ?\])
+			     (?\" . ?\")
+			     ))
+  (electric-pair-mode t)
+
+** Yes-or-No
+yes-or-no로 물어보는것을 y-or-n로 바꾸기 
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+
+* Packages
+
+** Doom Theme
+#+BEGIN_SRC emacs-lisp
+(use-package doom-themes
+      :if window-system
+      :ensure t
+      :config
+      (load-theme 'doom-molokai t)
+      (doom-themes-org-config)
+      (doom-themes-visual-bell-config))
+#+END_SRC
+
+** async
+#+BEGIN_SRC emacs-lisp
+  (use-package async
+    :ensure t
+    :init (dired-async-mode 1))
+#+END_SRC
+
+** icons
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+  :ensure t
+  :init)
+
+(use-package all-the-icons-dired
+  :ensure t
+  :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
+(use-package all-the-icons-ibuffer
+  :ensure t
+  :init (all-the-icons-ibuffer-mode 1))
+#+END_SRC
+
+** buffer-move
+#+BEGIN_SRC emacs-lisp
+(use-package buffer-move
+  :config
+  (global-set-key (kbd "<C-w-up>")     'buf-move-up)
+  (global-set-key (kbd "<C-w-down>")   'buf-move-down)
+  (global-set-key (kbd "<C-w-left>")   'buf-move-left)
+  (global-set-key (kbd "<C-w-right>")  'buf-move-right))
+#+END_SRC
+
+** Switch Window
+#+BEGIN_SRC emacs-lisp
+  (use-package switch-window
+    :ensure t
+    :config
+    (setq switch-window-input-style 'minibuffer)
+    (setq switch-window-increase 4)
+    (setq switch-window-threshold 2)
+    (setq switch-window-shortcut-style 'qwerty)
+    (setq switch-window-qwerty-shortcuts
+	  '("a" "s" "d" "f" "h" "j" "k" "l"))
+    :bind
+    ([remap other-window] . switch-window))
+#+END_SRC
+
+** swiper
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :ensure t
+    :bind ("C-s" . swiper))
+#+END_SRC
+
+
+**  vterm
+우분투 리눅스기반으로 설명 
+사전에 아래 패키지를 미리 설치할 것 
+sudo apt install cmake libtool libtool-bin 
+
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm
+    :ensure t
+    :init
+    (global-set-key (kbd "<M-return>") 'vterm))
+#+END_SRC
+
+** beacon
+#+BEGIN_SRC emacs-lisp
+(use-package beacon
+  :ensure t
+  :config
+    (beacon-mode 1))
+#+END_SRC
+
+** rainbow-mode
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-mode
+  :ensure t
+  :init (add-hook 'prog-mode-hook 'rainbow-mode))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+  (rainbow-delimiters-mode 1))
+#+END_SRC
+
+** exapnd-region
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :ensure t
+  :bind ("C-q" . er/expand-region))
+#+END_SRC
+
+** kill-ring
+default is 60
+#+BEGIN_SRC emacs-lisp
+  (setq kill-ring-max 100)
+#+END_SRC
+
+** popup-kill-ring
+browsing supports C-n and C-p
+#+BEGIN_SRC emacs-lisp
+(use-package popup-kill-ring
+  :ensure t
+  :bind ("M-y" . popup-kill-ring))
+#+END_SRC
+
+
+** hungry delete
+#+BEGIN_SRC emacs-lisp
+  (use-package hungry-delete
+    :ensure t
+    :config (global-hungry-delete-mode))
+#+END_SRC
+
+** Which Key
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode))
+#+END_SRC
+
+
+* Git integration
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t
+  :config
+  (setq magit-push-always-verify nil)
+  (setq git-commit-summary-max-length 50)
+  :bind
+  ("M-g" . magit-status))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package git-gutter
+  :init
+  (use-package git-gutter-fringe)
+  (setq-default left-fringe-width  20)
+  (setq-default right-fringe-width 20)
+  (set-face-foreground 'git-gutter-fr:modified "yellow")
+  (set-face-foreground 'git-gutter-fr:added    "blue")
+  (set-face-foreground 'git-gutter-fr:deleted  "white")
+  (setq git-gutter:window-width 2)
+  (setq git-gutter:unchanged-sign " ")
+  (global-git-gutter-mode +1))
+#+END_SRC
+
+
+
+* Company
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :config
+  (setq company-idle-delay 1)
+  (setq company-minimum-prefix-length 3)
+  :init
+  (company-mode 1))
+
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous)
+  (define-key company-active-map (kbd "SPC") #'company-abort))
+#+END_SRC
+
+
+
+* Org
+** Common Settings
+#+BEGIN_SRC emacs-lisp
+  (setq org-ellipsis " ")
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-export-with-smart-quotes t)
+  (setq org-src-window-setup 'current-window)
+  (add-hook 'org-mode-hook 'org-indent-mode)
+#+END_SRC
+
+** Org Bullets
+Pretty bullets to make your org file more pretty and managed.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+
+* Projectile
+
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :config
+  (setq projectile-enable-caching t
+        projectile-indexing-method 'alien
+        projectile-completion-system 'helm
+        projectile-switch-project-action 'helm-projectile)
+  ;; https://github.com/bbatsov/projectile/issues/1183
+  (setq projectile-mode-line
+        '(:eval (format " Projectile[%s]"
+                        (projectile-project-name))))
+  (projectile-global-mode))
+ 
+(use-package helm-projectile
+  :ensure t
+  :commands (helm-projectile)
+  :after helm
+  :config (helm-projectile-on))
+#+END_SRC
+
+
+* Helm
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm
+  :diminish helm-mode
+  :bind (("C-c h" . helm-mini)
+         ("C-h a" . helm-apropos)
+         ("C-x b" . helm-buffers-list)         
+         ("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
+         ("C-x f" . helm-find-files)
+         ("C-x c o" . helm-occur)
+         ("C-x c s" . helm-swoop)
+         ("C-x c y" . helm-yas-complete)
+         ("C-x c Y" . helm-yas-create-snippet-on-region)         
+         ("C-x c SPC" . helm-all-mark-rings)
+         ("C-x C-g" . helm-grep-do-git-grep)
+         )
+  :init
+  (require 'helm-config)
+  (setq helm-candidate-number-limit 100)
+  (setq helm-yas-display-key-on-candidate t)
+  (setq helm-idle-delay 0.0
+        helm-input-idle-delay 0.01                                  
+        helm-quick-update t
+        helm-M-x-requires-pattern nil
+        helm-ff-skip-boring-files t)
+  :config
+  (use-package helm-descbinds
+    :config (helm-descbinds-mode)))
+    
+(use-package helm-lsp)
+(use-package helm-swoop)
+(use-package helm-ag)
+(use-package helm-projectile)
+
+(use-package helm-ls
+  (add-hook 'prog-mode-hook  'lsp))
+#+END_SRC
+
+
+
+
+* Web Mode
+#+BEGIN_SRC emacs-lisp
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :config
+  (setq-default js-indent-level 2)
+  (setq-default js2-ignored-warnings '("msg.extra.trailing.comma")))
+
+
+(use-package web-mode
+  :mode
+  ("\\.hbs\\'"
+   "\\.tsx?\\'"
+   "\\.mustache\\'"
+   "\\.html?\\'"
+   "\\.php\\'"
+   "\\.vue\\'")
+  :config
+  (setq web-mode-enable-auto-pairing t
+        web-mode-enable-auto-closing t
+        web-mode-enable-current-element-highlight t
+        web-mode-enable-current-column-highlight nil
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2)
+  )
+
+
+(use-package emmet-mode
+  :defer t
+  :config
+  (define-key emmet-mode-keymap (kbd "C-j") nil)
+  (keyboard-translate ?\C-i ?\H-i)
+  (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line)
+  (setq
+   emmet-self-closing-tag-style " /"
+   emmet-preview-default 1
+   emmet-indent-after-insert t
+   emmet-indentation 2)
+  :hook
+  ((web-mode . emmet-mode)
+   (sgml-mode . emmet-mode)
+   (css-mode . emmet-mode)))
+
+
+(use-package rjsx-mode
+  :mode
+  ("\\.jsx?\\'")
+  :hook
+  ((web-mode . rjsx-mode)))
+#+END_SRC
+
+
+** Custom function
+
+#+BEGIN_SRC emacs-lisp
+  (defun edit-config ()
+    (interactive)
+    (find-file "~/.emacs.d/config.org"))
+  (global-set-key (kbd "C-c e") 'edit-config)
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+(defun kill-whole-word ()
+  (interactive)
+  (backward-word)
+  (kill-word 1))
+(global-set-key (kbd "C-c d w") 'kill-whole-word)
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+(defun copy-whole-line ()
+  (interactive)
+  (save-excursion
+    (kill-new
+     (buffer-substring
+      (point-at-bol)
+      (point-at-eol)))))
+(global-set-key (kbd "C-c y y") 'copy-whole-line)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defun kill-curr-buffer ()
+    (interactive)
+    (kill-buffer (current-buffer)))
+  (global-set-key (kbd "C-x k") 'kill-curr-buffer)
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+  (defun split-and-follow-horizontally ()
+    (interactive)
+    (split-window-below)
+    (balance-windows)
+    (other-window 1))
+  (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+
+  (defun split-and-follow-vertically ()
+    (interactive)
+    (split-window-right)
+    (balance-windows)
+    (other-window 1))
+  (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+#+END_SRC
