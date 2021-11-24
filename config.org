@@ -32,6 +32,11 @@
   (setq-default cursor-type 'box)
 #+END_SRC
 
+** Frame size
+#+BEGIN_SRC emacs-lisp
+(setq initial-frame-alist '((width . 80) (height . 120)))
+#+END_SRC
+
 ** Font
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute
