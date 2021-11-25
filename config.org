@@ -19,6 +19,8 @@
   (setq inhibit-startup-screen t)
   (setq ring-bell-function 'ignore)
   (setq create-lockfiles nil)
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
   (setq custom-file (make-temp-file "emacs-custom"))
   (setq default-directory (concat (getenv "HOME") "/"))
 
@@ -27,7 +29,6 @@
   (scroll-bar-mode -1)
   (blink-cursor-mode 1)
   (delete-selection-mode t)
-  (setq-default make-backup-files nil)
   (setq-default truncate-lines t)
   (setq-default cursor-type 'box)
 #+END_SRC
