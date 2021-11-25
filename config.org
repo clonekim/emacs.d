@@ -676,6 +676,7 @@ default is 60
 
 
 * Go
+gopls가 설치되어야 한다
 #+BEGIN_SRC emacs-lisp
   (defun lsp-go-install-save-hooks ()
     (add-hook 'before-save-hook #'lsp-format-buffer t t)
