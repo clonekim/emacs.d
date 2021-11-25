@@ -490,15 +490,17 @@ default is 60
            ("M-y" . helm-show-kill-ring)
            ("C-x f" . helm-find-files)
            ("C-x r f" . helm-recentf)
+           ("C-x p g" . helm-projectile-grep)
            ("C-x c o" . helm-occur)
            ("C-x c s" . helm-swoop)
            ("C-x c y" . helm-yas-complete)
            ("C-x c Y" . helm-yas-create-snippet-on-region)         
            ("C-x c SPC" . helm-all-mark-rings)
-           ("C-x C-g" . helm-grep-do-git-grep)
+           ("C-x c g" . helm-grep-do-git-grep)
            )
     :init
     (require 'helm-config)
+    (setq helm-split-window-inside-p t)
     (setq helm-candidate-number-limit 100)
     (setq helm-yas-display-key-on-candidate t)
     (setq helm-idle-delay 0.0

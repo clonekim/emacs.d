@@ -12,7 +12,7 @@ cider-history
 bookmarks
 *.eld
 *.el
-projectile-*
+projectile*
 session*
 .cache/
 .lsp*
