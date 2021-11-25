@@ -34,7 +34,7 @@
 
 ** Frame size
 #+BEGIN_SRC emacs-lisp
-(setq initial-frame-alist '((width . 140) (height . 78)))
+(setq initial-frame-alist '((width . 140) (height . 70)))
 #+END_SRC
 
 ** Font
@@ -124,10 +124,11 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 
 ** Spacemacs Theme
 #+BEGIN_SRC emacs-lisp
-(use-package spacemacs-themes
+  (use-package spacemacs-theme
     :if window-system
     :ensure t
-    :config
+    :defer t
+    :init
     (load-theme 'spacemacs-dark t))
 #+END_SRC
 ** Doom Modeline
@@ -165,23 +166,24 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 
 ** shell
 #+BEGIN_SRC emacs-lisp
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize))
 #+END_SRC
 
 ** auto-indent
 #+BEGIN_SRC emacs-lisp
-(use-package auto-indent
-  :config (auto-indent-global-mode ))
+  (use-package auto-indent-mode
+    :ensure t
+    :init (auto-indent-global-mode ))
 #+END_SRC
 
 ** whitespace-cleanup
 #+BEGIN_SRC emacs-lisp
-(use-package whitespace-cleanup-mode
-  :ensure t
-  :init (global-whitespace-cleanup-mode))
+  (use-package whitespace-cleanup-mode
+    :ensure t
+    :init (global-whitespace-cleanup-mode))
 #+END_SRC
 
 ** buffer-move
@@ -189,10 +191,10 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
   (use-package buffer-move
     :ensure t
     :config
-    (global-set-key (kbd "<C-w-up>")     'buf-move-up)
-    (global-set-key (kbd "<C-w-down>")   'buf-move-down)
-    (global-set-key (kbd "<C-w-left>")   'buf-move-left)
-    (global-set-key (kbd "<C-w-right>")  'buf-move-right))
+    (global-set-key (kbd "C-x <up>")     'buf-move-up)
+    (global-set-key (kbd "C-x <down>")   'buf-move-down)
+    (global-set-key (kbd "C-x <left>")   'buf-move-left)
+    (global-set-key (kbd "C-x <right>")  'buf-move-right))
 #+END_SRC
 
 ** Switch Window
@@ -298,10 +300,10 @@ default is 60
   (use-package hydra
     :ensure t)
 
-(defhydra hydra-zoom (global-map "<f2>")
-  "zoom"
-  ("g" text-scale-increase "in")
-  ("l" text-scale-decrease "out"))
+  (defhydra hydra-zoom (global-map "<f2>")
+    "zoom"
+    ("g" text-scale-increase "in")
+    ("l" text-scale-decrease "out"))
 #+END_SRC
 
 
@@ -372,18 +374,18 @@ default is 60
 
 
 #+BEGIN_SRC emacs-lisp
-    (defun split-and-follow-horizontally ()
-      (interactive)
-      (split-window-below)
-      (balance-windows)
-      (other-window 1))
-    (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
+  (defun split-and-follow-horizontally ()
+    (interactive)
+    (split-window-below)
+    (balance-windows)
+    (other-window 1))
+  (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)
 
-    (defun split-and-follow-vertically ()
-      (interactive)
-      (split-window-right)
-      (balance-windows)
-      (other-window 1))
+  (defun split-and-follow-vertically ()
+    (interactive)
+    (split-window-right)
+    (balance-windows)
+    (other-window 1))
   (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 
   (defun nolinum()
@@ -416,13 +418,13 @@ default is 60
 
 * Org
 #+BEGIN_SRC emacs-lisp
-    (setq org-ellipsis " ")
-    (setq org-src-fontify-natively t)
-    (setq org-src-tab-acts-natively t)
-    (setq org-confirm-babel-evaluate nil)
-    (setq org-export-with-smart-quotes t)
-    (setq org-src-window-setup 'current-window)
-    (add-hook 'org-mode-hook 'org-indent-mode)
+  (setq org-ellipsis " ")
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-export-with-smart-quotes t)
+  (setq org-src-window-setup 'current-window)
+  (add-hook 'org-mode-hook 'org-indent-mode)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -501,7 +503,7 @@ default is 60
 
   (use-package helm-xref
     :ensure t)
-  
+
 #+END_SRC
 
 
@@ -569,7 +571,7 @@ default is 60
     :ensure t
     :mode
     ("\\.jsx?\\'"))
-    
+
 #+END_SRC
 
 
@@ -611,6 +613,6 @@ default is 60
 * Add Hook
 org, dired에서는 라인넘버를 보여주지 않는다
 #+BEGIN_SRC emacs-lisp
- (add-hook 'org-mode-hook 'org-indent-mode  'nolinum)
- (add-hook 'dired-mode-hook  'nolinum)
+  (add-hook 'org-mode-hook 'org-indent-mode  'nolinum)
+  (add-hook 'dired-mode-hook  'nolinum)
 #+END_SRC
