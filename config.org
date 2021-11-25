@@ -637,21 +637,6 @@ default is 60
 
 
 * LSP
-- tool설치
-#+BEGIN_SRC bash
-  yarn global add eslint tslint tsc 
-#+END_SRC
-- deno를 설치한다 
-#+BEGIN_SRC bash
-  curl -fsSL https://deno.land/x/install/install.sh | sh
-#+END_SRC
-
-- .bashrc를 편집한다
-#+BEGIN_SRC
-  export DENO_INSTALL="$HOME/.deno"
-  export PATH=$PATH:$DENO_INSTALL/bin
-#+END_SRC
-
 #+BEGIN_SRC emacs-lisp
   (use-package json-mode
     :ensure t)
