@@ -34,7 +34,7 @@
 
 ** Frame size
 #+BEGIN_SRC emacs-lisp
-(setq initial-frame-alist '((width . 140) (height . 80)))
+(setq initial-frame-alist '((width . 140) (height . 78)))
 #+END_SRC
 
 ** Font
@@ -115,10 +115,20 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
   (use-package doom-themes
     :if window-system
     :ensure t
+    :disabled
     :config
     (load-theme 'doom-molokai t)
     (doom-themes-org-config)
     (doom-themes-visual-bell-config))
+#+END_SRC
+
+** Spacemacs Theme
+#+BEGIN_SRC emacs-lisp
+(use-package spacemacs-themes
+    :if window-system
+    :ensure t
+    :config
+    (load-theme 'spacemacs-dark t))
 #+END_SRC
 ** Doom Modeline
 #+BEGIN_SRC emacs-lisp
@@ -190,12 +200,13 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
   (use-package switch-window
     :ensure t
     :config
+    (setq switch-window-multiple-frames t)
     (setq switch-window-input-style 'minibuffer)
     (setq switch-window-increase 4)
     (setq switch-window-threshold 2)
-    (setq switch-window-shortcut-style 'qwerty)
-    (setq switch-window-qwerty-shortcuts
-          '("a" "s" "d" "f" "h" "j" "k" "l"))
+    ;;(setq switch-window-shortcut-style 'qwerty)
+    ;;(setq switch-window-qwerty-shortcuts
+    ;;      '("a" "s" "d" "f" "h" "j" "k" "l"))
     :bind
     ([remap other-window] . switch-window))
 #+END_SRC
@@ -423,6 +434,7 @@ default is 60
 #+END_SRC
 
 
+
 * Projectile
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
@@ -489,10 +501,7 @@ default is 60
 
   (use-package helm-xref
     :ensure t)
-
-  (use-package helm-ls
-    :ensure t
-    (add-hook 'prog-mode-hook  'lsp))
+  
 #+END_SRC
 
 
@@ -559,9 +568,8 @@ default is 60
   (use-package rjsx-mode
     :ensure t
     :mode
-    ("\\.jsx?\\'")
-    :hook
-    ((web-mode . rjsx-mode)))
+    ("\\.jsx?\\'"))
+    
 #+END_SRC
 
 
@@ -574,17 +582,29 @@ default is 60
   (use-package lsp-mode 
     :ensure t
     :config
-      (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-      (yas-global-mode))
+    (setq lsp-keymap-prefix "C-c l"
+          lsp-completion-show-detail nil 
+          lsp-completion-show-kind nil)
+    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+    (yas-global-mode))
+
+  (use-package lsp-ui
+    :ensure t)
 
   (use-package yasnippet
     :ensure t)
 
   (use-package lsp-treemacs
-    :ensure t)
+      :ensure t)
 
-(with-eval-after-load 'js
-  (define-key js-mode-map (kbd "M-.") nil))
+  (use-package helm-lsp
+    :ensure t
+    :config
+    (add-hook 'prog-mode-hook  'lsp)
+    (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
+
+  (with-eval-after-load 'js
+    (define-key js-mode-map (kbd "M-.") nil))
 #+END_SRC
 
 
