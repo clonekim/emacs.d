@@ -538,17 +538,22 @@ default is 60
 
 
 * Web Mode
+
+** prettier-js
 #+BEGIN_SRC emacs-lisp
   (use-package prettier-js
     :ensure t
     :config
     (setq prettier-js-args '(
-                           "--single-quote"
-                           "--jsx-single-quote" "true"
-                           "--bracket-spacing" "false"
-                           ))
+                             "--single-quote"
+                             "--jsx-single-quote" "true"
+                             "--bracket-spacing" "false"
+                             ))
     )
+#+END_SRC
 
+** js2-mode
+#+BEGIN_SRC emacs-lisp
   (use-package js2-mode
     :ensure t
     :mode
@@ -560,18 +565,21 @@ default is 60
                   js2-highlight-external-variables nil
                   js2-ignored-warnings '("msg.extra.trailing.comma"))
     (add-hook 'js2-mode-hook 'prettier-js-mode))
-
+#+END_SRC
+** typescript-mode
+#+BEGIN_SRC emacs-lisp
   (use-package typescript-mode
     :ensure t
     :mode "\\.tsx?\\'"
     :config
     (add-hook 'typescript-mode-hook 'lsp))
-    
+#+END_SRC
+** web-mode
+#+BEGIN_SRC emacs-lisp
   (use-package web-mode
     :ensure t
     :mode
     ("\\.hbs\\'"
-     "\\.tsx?\\'"
      "\\.mustache\\'"
      "\\.html?\\'"
      "\\.php\\'"
@@ -587,7 +595,9 @@ default is 60
           web-mode-attr-indent-offset 2
           css-indent-offset 2)
     (add-hook 'web-mode-hook 'prettier-js-mode))
-
+#+END_SRC
+** emmet-mode
+#+BEGIN_SRC emacs-lisp
   (use-package emmet-mode
     :ensure t
     :defer t
@@ -604,12 +614,13 @@ default is 60
     ((web-mode . emmet-mode)
      (sgml-mode . emmet-mode)
      (css-mode . emmet-mode)))
-
+#+END_SRC
+** jsx-mode
+#+BEGIN_SRC emacs-lisp
   (use-package rjsx-mode
     :ensure t
     :mode
     ("\\.jsx?\\'"))
-
 #+END_SRC
 
 
