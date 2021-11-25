@@ -235,6 +235,7 @@ sudo apt install cmake libtool libtool-bin
 ** beacon
 #+BEGIN_SRC emacs-lisp
   (use-package beacon
+    :if window-system
     :ensure t
     :config
     (beacon-mode 1))
@@ -295,7 +296,7 @@ default is 60
     :mode "\\.yml\\'")
 #+END_SRC
 
-** Hydra
+** Hydra 
 #+BEGIN_SRC emacs-lisp
   (use-package hydra
     :ensure t)
@@ -306,6 +307,21 @@ default is 60
     ("l" text-scale-decrease "out"))
 #+END_SRC
 
+** paredit
+#+BEGIN_SRC emacs-lisp
+  (use-package paredit
+    :ensure t
+    :diminish paredit-mode
+    :init
+    (use-package paredit-everywhere :ensure t)
+    (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+    (add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
+    (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+    (add-hook 'ielm-mode-hook             'enable-paredit-mode)
+    (add-hook 'lisp-mode-hook             'enable-paredit-mode)
+    (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+    (add-hook 'scheme-mode-hook           'enable-paredit-mode))
+#+END_SRC
 
 
 * Git integration
@@ -575,6 +591,48 @@ default is 60
 #+END_SRC
 
 
+* Clojure
+#+BEGIN_SRC emacs-lisp
+  (use-package clojure-mode
+    :ensure t
+    :config
+    (use-package flycheck-clojure
+      :ensure t
+      :after flycheck
+      :commands flycheck-clojure-setup
+      :init
+      (add-hook 'flycheck-mode-hook #'flycheck-clojure-setup))
+    (add-hook 'clojure-mode-hook
+              (lambda ()
+                (setq indent-tabs-mode nil)
+                (setq clojure-indent-style :always-align)
+                (define-clojure-indent
+                  (defroutes 'defun)
+                  (GET 2)
+                  (POST 2)
+                  (PUT 2)
+                  (DELETE 2)
+                  (PATCH 2)
+                  (HEAD 2)
+                  (ANY 2)
+                  (context 2))
+                (rainbow-delimiters-mode t)
+                (paredit-mode t)
+                (subword-mode t))))
+
+  (use-package cider
+    :ensure t
+    :commands (cider cider-connect cider-jack-in)
+    :config
+    (add-hook 'cider-mode-hook 'eldoc-mode)
+    (add-hook 'cider-repl-mode-hook (lambda ()
+              (setq cider-repl-history-file "~/.emacs.d/cider-history")
+              (turn-on-eldoc-mode)
+              (paredit-mode t)
+              (subword-mode t))))
+#+END_SRC
+
+
 * LSP
 
 #+BEGIN_SRC emacs-lisp
@@ -583,10 +641,11 @@ default is 60
 
   (use-package lsp-mode 
     :ensure t
-    :config
+    :init
     (setq lsp-keymap-prefix "C-c l"
           lsp-completion-show-detail nil 
           lsp-completion-show-kind nil)
+    :config
     (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
     (yas-global-mode))
 
@@ -602,7 +661,8 @@ default is 60
   (use-package helm-lsp
     :ensure t
     :config
-    (add-hook 'prog-mode-hook  'lsp)
+    ;; (add-hook 'prog-mode-hook  'lsp)
+    (add-hook 'js2-mode-hook  'lsp)
     (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
 
   (with-eval-after-load 'js
