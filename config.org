@@ -552,6 +552,12 @@ default is 60
                   js2-ignored-warnings '("msg.extra.trailing.comma"))
     (add-hook 'js2-mode-hook 'prettier-js-mode))
 
+  (use-package typescript-mode
+    :ensure t
+    :mode "\\.tsx?\\'"
+    :config
+    (add-hook 'typescript-mode-hook 'lsp))
+    
   (use-package web-mode
     :ensure t
     :mode
