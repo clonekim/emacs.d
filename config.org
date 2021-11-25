@@ -666,10 +666,28 @@ default is 60
     :config
     ;; (add-hook 'prog-mode-hook  'lsp)
     (add-hook 'js2-mode-hook  'lsp)
-    (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol))
+    ;; buffer list에서 버퍼이름이 편집상태가 되서 일단 코멘트처리
+    ;;(define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)
+    )
 
   (with-eval-after-load 'js
     (define-key js-mode-map (kbd "M-.") nil))
+#+END_SRC
+
+
+* Go
+#+BEGIN_SRC emacs-lisp
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+  (use-package go-mode
+    :ensure t
+    :config
+    (add-hook 'go-mode-hook #'lsp-deferred)
+    (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+    (add-hook 'go-mode-hook #'yas-minor-mode)
+    )
 #+END_SRC
 
 
