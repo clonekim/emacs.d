@@ -163,7 +163,7 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 
 ** auto-indent
 #+BEGIN_SRC emacs-lisp
-(use-package auto-indent-mode
+(use-package auto-indent
   :config (auto-indent-global-mode ))
 #+END_SRC
 
@@ -281,6 +281,18 @@ default is 60
     :ensure t
     :mode "\\.yml\\'")
 #+END_SRC
+
+** Hydra
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra
+    :ensure t)
+
+(defhydra hydra-zoom (global-map "<f2>")
+  "zoom"
+  ("g" text-scale-increase "in")
+  ("l" text-scale-decrease "out"))
+#+END_SRC
+
 
 
 * Git integration
