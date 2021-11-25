@@ -34,7 +34,9 @@
 
 ** Frame size
 #+BEGIN_SRC emacs-lisp
-(setq initial-frame-alist '((width . 140) (height . 70)))
+  (setq default-frame-alist '((width . 120) (height . 70)))
+  (when window-system
+    (set-frame-size (selected-frame) 120 70))
 #+END_SRC
 
 ** Font
@@ -537,7 +539,9 @@ default is 60
 
   (use-package js2-mode
     :ensure t
-    :mode "\\.js\\'"
+    :mode
+    ("\\.js\\'"
+     "\\.vue\\'")
     :config
     (setq-default js-indent-level 2
                   js2-strict-missing-semi-warning nil
@@ -634,6 +638,20 @@ default is 60
 
 
 * LSP
+1. tool설치
+#+BEGIN_SRC bash
+  yarn global add eslint tslint tsc 
+#+END_SRC
+2. deno를 설치한다 
+#+BEGIN_SRC bash
+  curl -fsSL https://deno.land/x/install/install.sh | sh
+#+END_SRC
+
+.bashrc를 편집한다
+#+BEGIN_SRC
+  export DENO_INSTALL="$HOME/.deno"
+  export PATH=$PATH:$DENO_INSTALL/bin
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (use-package json-mode
@@ -673,6 +691,6 @@ default is 60
 * Add Hook
 org, dired에서는 라인넘버를 보여주지 않는다
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'org-mode-hook 'org-indent-mode  'nolinum)
+  (add-hook 'org-mode-hook  'nolinum)
   (add-hook 'dired-mode-hook  'nolinum)
 #+END_SRC
