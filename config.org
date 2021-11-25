@@ -46,7 +46,7 @@
    'default nil
    :font
    (if (eq system-type 'darwin)
-       "Andale Mono 12"
+       "Andale Mono 14"
      "DejaVu Sans Mono 9"))
 
   (unless (eq system-type 'darwin)
