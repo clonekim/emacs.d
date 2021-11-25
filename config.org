@@ -167,6 +167,15 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
     :init (all-the-icons-ibuffer-mode 1))
 #+END_SRC
 
+** dired-hidden-files
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-hide-dotfiles
+    :ensure t
+    :config
+    (define-key dired-mode-map "." #'dired-hide-dotfiles-mode)
+    (add-hook 'dired-mode-hook  #'dired-hide-dotfiles-mode))
+#+END_SRC
+
 ** shell
 #+BEGIN_SRC emacs-lisp
   (use-package exec-path-from-shell
