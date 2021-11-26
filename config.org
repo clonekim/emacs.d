@@ -218,9 +218,9 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
     (setq switch-window-input-style 'minibuffer)
     (setq switch-window-increase 4)
     (setq switch-window-threshold 2)
-    ;;(setq switch-window-shortcut-style 'qwerty)
-    ;;(setq switch-window-qwerty-shortcuts
-    ;;      '("a" "s" "d" "f" "h" "j" "k" "l"))
+    (setq switch-window-shortcut-style 'qwerty)
+    (setq switch-window-qwerty-shortcuts
+          '("a" "s" "d" "f" "h" "j" "k" "l"))
     :bind
     ([remap other-window] . switch-window))
 #+END_SRC
