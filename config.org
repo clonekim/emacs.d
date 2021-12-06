@@ -23,6 +23,7 @@
   (setq auto-save-default nil)
   (setq custom-file (make-temp-file "emacs-custom"))
   (setq default-directory (concat (getenv "HOME") "/"))
+  (setq dired-listing-switches "-alh")
 
   (tool-bar-mode -1)
   (menu-bar-mode -1)
