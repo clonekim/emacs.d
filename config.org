@@ -195,7 +195,9 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 #+BEGIN_SRC emacs-lisp
   (use-package whitespace-cleanup-mode
     :ensure t
-    :init (global-whitespace-cleanup-mode))
+    :init 
+    (add-hook 'js2-mode-hook 'whitespace-cleanup-mode)
+    (add-hook 'clojure-mode-hook 'whitespace-cleanup-mode))
 #+END_SRC
 
 ** buffer-move
