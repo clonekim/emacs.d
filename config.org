@@ -36,9 +36,9 @@
 
 ** Frame size
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((width . 120) (height . 70)))
+  (setq default-frame-alist '((width . 120) (height . 50)))
   (when window-system
-    (set-frame-size (selected-frame) 120 70))
+    (set-frame-size (selected-frame) 120 50))
 #+END_SRC
 
 ** Font
@@ -728,4 +728,5 @@ org, dired에서는 라인넘버를 보여주지 않는다
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook  'nolinum)
   (add-hook 'dired-mode-hook  'nolinum)
+  (add-hook 'prog-mode-hook  'linum-mode)
 #+END_SRC
