@@ -14,7 +14,7 @@
 
 
 ## Blog
-[Living an Awesome Life](https://sachachua.com/blog/)
+[Living an Awesome Life](https://sachachua.com/blog/)  
 [Emacs Config](https://jamiecollinson.com/blog/my-emacs-config)  
 [A year with Emacs](http://frostyx.cz/posts/a-year-with-emacs)   
 [Goodbye VSCode, Hello Emacs (Again)](https://hotair.tech/blog/goodbye-vscode)  
