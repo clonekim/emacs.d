@@ -1,4 +1,5 @@
-#+STARTUP: overview
+#+title: Emacs Configuration
+
 * Garbage Collection
 #+BEGIN_SRC emacs-lisp
   (setq gc-cons-threshold 10000000)
@@ -161,6 +162,7 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 
   (use-package all-the-icons-dired
     :ensure t
+    :disabled
     :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
   (use-package all-the-icons-ibuffer
@@ -206,16 +208,17 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
   (use-package buffer-move
     :ensure t
     :config
-    (global-set-key (kbd "C-x <up>")     'buf-move-up)
-    (global-set-key (kbd "C-x <down>")   'buf-move-down)
-    (global-set-key (kbd "C-x <left>")   'buf-move-left)
-    (global-set-key (kbd "C-x <right>")  'buf-move-right))
+    (global-set-key (kbd "<f2> <up>")     'buf-move-up)
+    (global-set-key (kbd "<f2> <down>")   'buf-move-down)
+    (global-set-key (kbd "<f2> <left>")   'buf-move-left)
+    (global-set-key (kbd "<f2> <right>")  'buf-move-right))
 #+END_SRC
 
 ** Switch Window
 #+BEGIN_SRC emacs-lisp
   (use-package switch-window
     :ensure t
+    :disabled
     :config
     (setq switch-window-multiple-frames t)
     (setq switch-window-input-style 'minibuffer)
@@ -226,6 +229,14 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
           '("a" "s" "d" "f" "h" "j" "k" "l"))
     :bind
     ([remap other-window] . switch-window))
+#+END_SRC
+
+** winum
+#+BEGIN_SRC emacs-lisp
+  (use-package winum
+    :ensure t
+    :config
+    (winum-mode))
 #+END_SRC
 
 ** swiper
@@ -422,7 +433,6 @@ default is 60
   (defun nolinum()
     (interactive)
     (message "Deactivated linum mode")
-    (global-linum-mode 0)
     (linum-mode 0))
 #+END_SRC
 
