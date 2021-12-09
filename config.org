@@ -113,6 +113,18 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 #+END_SRC
 
 
+* Dashboard
+#+BEGIN_SRC emacs-lisp
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook)
+    (setq dashboard-items '((recents . 7)
+                            (bookmarks . 5)
+                            (projects . 5))))
+#+END_SRC
+
+
 * Packages
 
 ** Doom Theme
@@ -680,6 +692,12 @@ default is 60
 
 * LSP
 #+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t)
+
+  (use-package company
+    :ensure t)
+
   (use-package json-mode
     :ensure t)
 
