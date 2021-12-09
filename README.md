@@ -1,4 +1,4 @@
-# macs
+# Emacs
 
 ## Org 시작하기
 [Org-mode 기초부터 시작하기](https://edykim.com/ko/post/start-with-orgmode-basics/)
