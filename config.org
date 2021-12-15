@@ -59,9 +59,8 @@
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode 1)
   (global-linum-mode 1)
-  (setq linum-format "%6d ")
-  (show-paren-mode 1)
-  (fringe-mode 1)
+  (setq linum-format "%5d ")
+  (show-paren-mode 1)  
   (custom-set-faces
    '(fringe-mode 1 nil (fringe))
    (unless (eq system-type 'darwin)
