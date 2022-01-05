@@ -120,7 +120,8 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
     (dashboard-setup-startup-hook)
     (setq dashboard-items '((recents . 7)
                             (bookmarks . 5)
-                            (projects . 5))))
+                            (projects . 5))
+          dashboard-startup-banner "~/.emacs.d/pony.png"))
 #+END_SRC
 
 
@@ -180,16 +181,6 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
     :ensure t
     :init (all-the-icons-ibuffer-mode 1))
 #+END_SRC
-
-** dired-hidden-files
-#+BEGIN_SRC emacs-lisp
-  (use-package dired-hide-dotfiles
-    :ensure t
-    :config
-    (define-key dired-mode-map "." #'dired-hide-dotfiles-mode)
-    (add-hook 'dired-mode-hook  #'dired-hide-dotfiles-mode))
-#+END_SRC
-
 ** shell
 #+BEGIN_SRC emacs-lisp
   (use-package exec-path-from-shell
@@ -229,7 +220,6 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 #+BEGIN_SRC emacs-lisp
   (use-package switch-window
     :ensure t
-    :disabled
     :config
     (setq switch-window-multiple-frames t)
     (setq switch-window-input-style 'minibuffer)
@@ -267,15 +257,6 @@ sudo apt install cmake libtool libtool-bin
     :ensure t
     :init
     (global-set-key (kbd "<M-return>") 'vterm))
-#+END_SRC
-
-** beacon
-#+BEGIN_SRC emacs-lisp
-  (use-package beacon
-    :if window-system
-    :ensure t
-    :config
-    (beacon-mode 1))
 #+END_SRC
 
 ** rainbow-mode
