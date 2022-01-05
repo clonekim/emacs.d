@@ -705,7 +705,8 @@ default is 60
     :init
     (setq lsp-keymap-prefix "C-c l"
           lsp-completion-show-detail nil 
-          lsp-completion-show-kind nil)
+          lsp-completion-show-kind nil
+          lsp-enable-links nil) ;;https://emacs.stackexchange.com/questions/58380/error-running-timer-lsp-on-idle-error-the-connected-servers-does-not-sup
     :config
     (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
     (yas-global-mode))
