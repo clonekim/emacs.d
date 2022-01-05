@@ -708,14 +708,15 @@ default is 60
           lsp-completion-show-kind nil
           lsp-enable-links nil) ;;https://emacs.stackexchange.com/questions/58380/error-running-timer-lsp-on-idle-error-the-connected-servers-does-not-sup
     :config
-    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-    (yas-global-mode))
+    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
 
   (use-package lsp-ui
     :ensure t)
 
   (use-package yasnippet
-    :ensure t)
+    :ensure t
+    :init
+    (yas-global-mode))
 
   (use-package lsp-treemacs
       :ensure t)
