@@ -1,10 +1,10 @@
 (require 'package)
 
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
 (setq package-enable-at-startup nil)
-(setq package-archive-priorities '(("melpa-stable" . 1)))
+(setq package-archive-priorities '(("melpa" . 1)))
 
 (package-initialize)
 
