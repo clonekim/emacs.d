@@ -550,10 +550,14 @@ default is 60
     :ensure t
     :config
     (setq prettier-js-args '(
+                             "--semi"
                              "--single-quote"
                              "--jsx-single-quote" "true"
-                             "--bracket-spacing" "false"
-                             ))
+                             "--bracket-spacing" "true"
+                             "--bracket-same-line" "true"
+                             "--jsx-bracket-same-line" "true"
+                             "--arrow-parens" "avoid"
+                             "--trailing-comma" "all"))
     )
 #+END_SRC
 
