@@ -581,7 +581,8 @@ default is 60
     :ensure t
     :mode "\\.tsx?\\'"
     :config
-    (add-hook 'typescript-mode-hook 'lsp))
+    (add-hook 'typescript-mode-hook 'lsp)
+    (add-hook 'typescript-mode-hook 'prettier-js-mode))
 #+END_SRC
 ** web-mode
 #+BEGIN_SRC emacs-lisp
