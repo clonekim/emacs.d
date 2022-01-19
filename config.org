@@ -121,7 +121,7 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
     (setq dashboard-items '((recents . 7)
                             (bookmarks . 5)
                             (projects . 5))
-          dashboard-startup-banner "~/.emacs.d/pony.png"))
+          dashboard-startup-banner "~/.emacs.d/dongha.png"))
 #+END_SRC
 
 
