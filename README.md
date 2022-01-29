@@ -18,3 +18,10 @@
 [Emacs Config](https://jamiecollinson.com/blog/my-emacs-config)  
 [A year with Emacs](http://frostyx.cz/posts/a-year-with-emacs)   
 [Goodbye VSCode, Hello Emacs (Again)](https://hotair.tech/blog/goodbye-vscode)  
+
+
+## Changes
+
+ 갑자기 에러가 발생해서 에러가 발생하는 패키지만 일단 제거  
+ 추후에 문법에러를 살펴보기로 한다  
+![emas-error](./emacs-error.png)

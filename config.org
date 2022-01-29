@@ -120,7 +120,8 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
     (dashboard-setup-startup-hook)
     (setq dashboard-items '((recents . 7)
                             (bookmarks . 5)
-                            (projects . 5))))
+                            (projects . 5))
+          dashboard-startup-banner "~/.emacs.d/dongha.png"))
 #+END_SRC
 
 
@@ -180,16 +181,6 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
     :ensure t
     :init (all-the-icons-ibuffer-mode 1))
 #+END_SRC
-
-** dired-hidden-files
-#+BEGIN_SRC emacs-lisp
-  (use-package dired-hide-dotfiles
-    :ensure t
-    :config
-    (define-key dired-mode-map "." #'dired-hide-dotfiles-mode)
-    (add-hook 'dired-mode-hook  #'dired-hide-dotfiles-mode))
-#+END_SRC
-
 ** shell
 #+BEGIN_SRC emacs-lisp
   (use-package exec-path-from-shell
@@ -229,7 +220,6 @@ yes-or-no로 물어보는것을 y-or-n로 바꾸기
 #+BEGIN_SRC emacs-lisp
   (use-package switch-window
     :ensure t
-    :disabled
     :config
     (setq switch-window-multiple-frames t)
     (setq switch-window-input-style 'minibuffer)
@@ -267,15 +257,6 @@ sudo apt install cmake libtool libtool-bin
     :ensure t
     :init
     (global-set-key (kbd "<M-return>") 'vterm))
-#+END_SRC
-
-** beacon
-#+BEGIN_SRC emacs-lisp
-  (use-package beacon
-    :if window-system
-    :ensure t
-    :config
-    (beacon-mode 1))
 #+END_SRC
 
 ** rainbow-mode
@@ -569,10 +550,14 @@ default is 60
     :ensure t
     :config
     (setq prettier-js-args '(
+                             "--semi"
                              "--single-quote"
                              "--jsx-single-quote" "true"
-                             "--bracket-spacing" "false"
-                             ))
+                             "--bracket-spacing" "true"
+                             "--bracket-same-line" "true"
+                             "--jsx-bracket-same-line" "true"
+                             "--arrow-parens" "avoid"
+                             "--trailing-comma" "all"))
     )
 #+END_SRC
 
@@ -596,7 +581,8 @@ default is 60
     :ensure t
     :mode "\\.tsx?\\'"
     :config
-    (add-hook 'typescript-mode-hook 'lsp))
+    (add-hook 'typescript-mode-hook 'lsp)
+    (add-hook 'typescript-mode-hook 'prettier-js-mode))
 #+END_SRC
 ** web-mode
 #+BEGIN_SRC emacs-lisp

@@ -1,4 +1,5 @@
 (require 'package)
+;;(setq debug-on-error t)
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
